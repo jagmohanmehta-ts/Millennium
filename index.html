@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Millennium Medisolutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --primary:#00a8cc;
+      --secondary:#00c896;
+      --accent:#ffd54f;
+      --danger:#ff6b6b;
+      --dark:#0d2b45;
+      --dark2:#1e4d6b;
+      --glass:rgba(255,255,255,0.55);
+      --glass-border:rgba(255,255,255,0.65);
+      --white:#ffffff;
+      --text:#1b3a4b;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      color:#12344d;
+      min-height:100vh;
+      overflow-x:hidden;
+      position:relative;
+      background:linear-gradient(-45deg,#f8fcff,#e3f2fd,#d9f4ff,#eef9ff,#f5fcff);
+      background-size:400% 400%;
+      animation:gradientMove 18s ease infinite;
+    }
+
+    @keyframes gradientMove{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(rgba(0,120,160,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,120,160,0.04) 1px, transparent 1px);
+      background-size:30px 30px;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      top:-30%;
+      left:-20%;
+      width:140%;
+      height:140%;
+      background:linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255,255,255,0.40) 40%,
+        transparent 60%
+      );
+      transform:rotate(8deg);
+      animation:lightSweep 12s linear infinite;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    @keyframes lightSweep{
+      0%{transform:translateX(-20%) rotate(8deg);}
+      100%{transform:translateX(20%) rotate(8deg);}
+    }
+
+    .particles{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .particles span{
+      position:absolute;
+      bottom:-120px;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(0,168,204,0.15);
+      box-shadow:0 0 15px rgba(0,168,204,0.15);
+      animation:particlesMove linear infinite;
+    }
+
+    .particles span:nth-child(1){left:8%; width:8px; height:8px; animation-duration:18s; animation-delay:0s;}
+    .particles span:nth-child(2){left:18%; width:14px; height:14px; animation-duration:24s; animation-delay:3s;}
+    .particles span:nth-child(3){left:30%; width:7px; height:7px; animation-duration:20s; animation-delay:5s;}
+    .particles span:nth-child(4){left:42%; width:12px; height:12px; animation-duration:26s; animation-delay:2s;}
+    .particles span:nth-child(5){left:56%; width:9px; height:9px; animation-duration:22s; animation-delay:4s;}
+    .particles span:nth-child(6){left:68%; width:15px; height:15px; animation-duration:28s; animation-delay:1s;}
+    .particles span:nth-child(7){left:78%; width:8px; height:8px; animation-duration:19s; animation-delay:6s;}
+    .particles span:nth-child(8){left:90%; width:11px; height:11px; animation-duration:25s; animation-delay:2s;}
+
+    @keyframes particlesMove{
+      0%{
+        transform:translateY(0) scale(0.6);
+        opacity:0;
+      }
+      10%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-120vh) scale(1.3);
+        opacity:0;
+      }
+    }
+
+    .bg-blobs{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .bg-blobs span{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:0.18;
+      animation:floatBlob 12s infinite ease-in-out;
+    }
+
+    .bg-blobs span:nth-child(1){
+      width:250px;
+      height:250px;
+      background:#7dd3fc;
+      top:5%;
+      left:5%;
+    }
+
+    .bg-blobs span:nth-child(2){
+      width:280px;
+      height:280px;
+      background:#86efac;
+      bottom:8%;
+      left:8%;
+      animation-delay:2s;
+    }
+
+    .bg-blobs span:nth-child(3){
+      width:260px;
+      height:260px;
+      background:#fde68a;
+      top:12%;
+      right:8%;
+      animation-delay:4s;
+    }
+
+    .bg-blobs span:nth-child(4){
+      width:220px;
+      height:220px;
+      background:#fca5a5;
+      bottom:10%;
+      right:10%;
+      animation-delay:1s;
+    }
+
+    @keyframes floatBlob{
+      0%,100%{transform:translate(0,0) scale(1);}
+      50%{transform:translate(20px,-25px) scale(1.05);}
+    }
+
+    .wrapper{
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width:1380px;
+      margin:auto;
+      padding:30px 20px 100px;
+    }
+
+    .hero{
+      background:rgba(255,255,255,0.58);
+      border:1px solid rgba(255,255,255,0.72);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,80,120,0.12);
+      margin-bottom:28px;
+      animation:fadeUp 1.2s ease;
+    }
+
+    .hero-top{
+      height:6px;
+      background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent),var(--danger));
+      background-size:200% 200%;
+      animation:topLineMove 5s linear infinite;
+    }
+
+    @keyframes topLineMove{
+      0%{background-position:0% 50%;}
+      100%{background-position:100% 50%;}
+    }
+
+    .hero-content{
+      display:grid;
+      grid-template-columns:1.2fr 0.8fr;
+      gap:30px;
+      padding:50px;
+      align-items:center;
+    }
+
+    .hero-left .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(0,168,204,0.10);
+      border:1px solid rgba(0,168,204,0.18);
+      color:#0f4c5c;
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:18px;
+      animation:fadeUp 1.1s ease;
+    }
+
+    .hero-left .tag i{
+      color:var(--secondary);
+    }
+
+    .hero-left h1{
+      font-size:48px;
+      line-height:1.1;
+      font-weight:800;
+      text-transform:uppercase;
+      margin-bottom:12px;
+      letter-spacing:0.5px;
+      color:#0d2b45;
+      animation:fadeUp 1.3s ease;
+    }
+
+    .sub-badge{
+      display:inline-block;
+      padding:9px 16px;
+      border-radius:14px;
+      background:linear-gradient(90deg,#ffe082,#ffd54f);
+      color:#4e3200;
+      font-weight:700;
+      font-size:14px;
+      margin-bottom:18px;
+      box-shadow:0 10px 25px rgba(255,213,79,0.22);
+      animation:fadeUp 1.5s ease;
+    }
+
+    .line{
+      width:110px;
+      height:5px;
+      border-radius:20px;
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      margin:8px 0 24px;
+      animation:linePulse 2.5s infinite ease-in-out;
+    }
+
+    @keyframes linePulse{
+      0%,100%{transform:scaleX(1);}
+      50%{transform:scaleX(1.15);}
+    }
+
+    .hero-left p{
+      font-size:16px;
+      line-height:1.9;
+      color:#35576b;
+      max-width:700px;
+      margin-bottom:30px;
+      animation:fadeUp 1.7s ease;
+    }
+
+    .btn-group{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      animation:fadeUp 1.9s ease;
+    }
+
+    .btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:16px 24px;
+      border-radius:16px;
+      font-weight:700;
+      transition:0.35s ease;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .btn::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent);
+      transition:0.6s;
+    }
+
+    .btn:hover::before{
+      left:100%;
+    }
+
+    .btn-primary{
+      color:#ffffff;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      box-shadow:0 16px 35px rgba(0,168,204,0.22);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-4px);
+      box-shadow:0 20px 40px rgba(0,168,204,0.28);
+    }
+
+    .btn-secondary{
+      color:#0d2b45;
+      background:rgba(255,255,255,0.62);
+      border:1px solid rgba(0,168,204,0.18);
+    }
+
+    .btn-secondary:hover{
+      transform:translateY(-4px);
+      background:rgba(255,255,255,0.82);
+    }
+
+    .hero-right{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .hero-stats{
+      width:100%;
+      display:grid;
+      gap:16px;
+    }
+
+    .stat-card{
+      background:rgba(255,255,255,0.60);
+      border:1px solid rgba(255,255,255,0.72);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:0 12px 30px rgba(0,80,120,0.10);
+      transition:0.35s ease;
+      animation:fadeUp 1.2s ease;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-6px);
+      background:rgba(255,255,255,0.75);
+    }
+
+    .stat-card h3{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:18px;
+      margin-bottom:8px;
+      color:#0d2b45;
+    }
+
+    .stat-card h3 i{
+      color:var(--secondary);
+    }
+
+    .stat-card p{
+      color:#3c5e72;
+      line-height:1.8;
+      font-size:14px;
+    }
+
+    .section-title{
+      margin:10px 0 20px;
+      text-align:center;
+      animation:fadeUp 1.4s ease;
+    }
+
+    .section-title h2{
+      font-size:34px;
+      font-weight:800;
+      margin-bottom:8px;
+      text-transform:uppercase;
+      color:#0d2b45;
+    }
+
+    .section-title p{
+      color:#456779;
+      font-size:15px;
+    }
+
+    .branch-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .branch-card{
+      background:rgba(255,255,255,0.58);
+      border:1px solid rgba(255,255,255,0.72);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border-radius:26px;
+      overflow:hidden;
+      box-shadow:0 18px 45px rgba(0,80,120,0.10);
+      transition:0.35s ease;
+      position:relative;
+      animation:fadeUp 1.3s ease;
+    }
+
+    .branch-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 24px 55px rgba(0,80,120,0.14);
+    }
+
+    .branch-top{
+      padding:22px 24px;
+      background:linear-gradient(135deg,rgba(0,168,204,0.12),rgba(0,200,150,0.08));
+      border-bottom:1px solid rgba(0,168,204,0.10);
+    }
+
+    .branch-label{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:700;
+      color:#0d2b45;
+      background:linear-gradient(90deg,#ffffff,#e0f7ff);
+      margin-bottom:12px;
+    }
+
+    .branch-top h3{
+      font-size:24px;
+      line-height:1.3;
+      font-weight:800;
+      color:#0d2b45;
+    }
+
+    .branch-body{
+      padding:22px 24px 26px;
+    }
+
+    .info-row{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding:14px 0;
+      border-bottom:1px solid rgba(0,168,204,0.10);
+      transition:0.3s ease;
+    }
+
+    .info-row:hover{
+      transform:translateX(4px);
+    }
+
+    .info-row:last-child{
+      border-bottom:none;
+      padding-bottom:0;
+    }
+
+    .icon-box{
+      width:42px;
+      min-width:42px;
+      height:42px;
+      border-radius:12px;
+      background:rgba(0,168,204,0.10);
+      color:var(--primary);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:16px;
+      transition:0.3s ease;
+    }
+
+    .info-row:hover .icon-box{
+      transform:scale(1.08);
+      background:rgba(0,168,204,0.18);
+    }
+
+    .info-text{
+      font-size:14px;
+      line-height:1.8;
+      color:#35576b;
+      word-break:break-word;
+    }
+
+    .info-text strong{
+      display:block;
+      font-size:15px;
+      color:#0d2b45;
+      margin-bottom:2px;
+    }
+
+    .gst-number{
+      display:inline-block;
+      color:#a10000;
+      background:#fff176;
+      padding:4px 10px;
+      border-radius:8px;
+      font-weight:800;
+      letter-spacing:0.5px;
+      margin-top:4px;
+      animation:gstGlow 1.8s infinite alternate;
+    }
+
+    @keyframes gstGlow{
+      from{box-shadow:0 0 0 rgba(255,241,118,0);}
+      to{box-shadow:0 0 18px rgba(255,241,118,0.45);}
+    }
+
+    .phone-number{
+      color:#0d2b45;
+      font-weight:700;
+    }
+
+    .mail-link{
+      color:#007fa3;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .mail-link:hover{
+      text-decoration:underline;
+    }
+
+    .whatsapp-link{
+      color:#0a9c5c;
+      font-weight:700;
+      text-decoration:none;
+      display:inline-block;
+      animation:whatsappPulse 1.5s infinite;
+    }
+
+    @keyframes whatsappPulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.07);}
+      100%{transform:scale(1);}
+    }
+
+    .footer{
+      position:fixed;
+      left:0;
+      bottom:0;
+      width:100%;
+      text-align:center;
+      padding:15px 20px;
+      background:rgba(255,255,255,0.75);
+      backdrop-filter:blur(10px);
+      border-top:1px solid rgba(0,168,204,0.12);
+      color:#35576b;
+      font-size:14px;
+      z-index:20;
+    }
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:1100px){
+      .hero-content{
+        grid-template-columns:1fr;
+        padding:40px 28px;
+      }
+
+      .branch-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .hero-left h1{
+        font-size:38px;
+      }
+    }
+
+    @media(max-width:768px){
+      .branch-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-left h1{
+        font-size:30px;
+      }
+
+      .section-title h2{
+        font-size:26px;
+      }
+
+      .btn{
+        width:100%;
+      }
+    }
+
+    @media(max-width:480px){
+      .wrapper{
+        padding:18px 14px 90px;
+      }
+
+      .hero-content{
+        padding:24px 18px;
+      }
+
+      .branch-top,
+      .branch-body{
+        padding-left:18px;
+        padding-right:18px;
+      }
+
+      .hero-left p{
+        font-size:14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="particles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="bg-blobs">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="wrapper">
+
+    <section class="hero">
+      <div class="hero-top"></div>
+      <div class="hero-content">
+
+        <div class="hero-left">
+          <div class="tag">
+            <i class="fa-solid fa-capsules"></i>
+            Trusted Pharma Distribution Network
+          </div>
+
+          <h1>Millennium Medisolutions Pvt Ltd</h1>
+          <div class="sub-badge">A Unit of Entero Healthcare Solutions Limited</div>
+          <div class="line"></div>
+
+          <p>
+            Delivering reliable pharmaceutical distribution with speed, trust, and operational excellence.
+            We support healthcare supply chains through efficient logistics, professional service,
+            strong branch coordination, and seamless order management across locations.
+          </p>
+
+          <div class="btn-group">
+            <a href="https://www.enterodirect.com" target="_blank" class="btn btn-primary">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>ONLINE ORDER PORTAL</span>
+            </a>
+
+            <a href="mailto:shitiz@millenniumgroup.in" class="btn btn-secondary">
+              <i class="fa-solid fa-envelope"></i>
+              <span>Email Corporate Desk</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-stats">
+            <div class="stat-card">
+              <h3><i class="fa-solid fa-building"></i> Multi-Location Presence</h3>
+              <p>Head Office and multiple branches designed for faster response, better supply coverage, and stronger customer service.</p>
+            </div>
+
+            <div class="stat-card">
+              <h3><i class="fa-solid fa-truck-fast"></i> Efficient Distribution</h3>
+              <p>Modern operational support for order processing, dispatch planning, and healthcare delivery coordination.</p>
+            </div>
+
+            <div class="stat-card">
+              <h3><i class="fa-solid fa-headset"></i> Customer Assistance</h3>
+              <p>Dedicated support through phone, email, and WhatsApp for order-related and general business queries.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-title">
+      <h2>Our Locations</h2>
+      </div>
+
+    <section class="branch-grid">
+
+      <div class="branch-card">
+        <div class="branch-top">
+    
+          <h3><i class="fa-solid fa-landmark"></i> HO - Gurugram</h3>
+        </div>
+        <div class="branch-body">
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="info-text">
+              <strong>Office Address</strong>
+          KHASRA NO 672,678,679, HERO HONDA CHOWK, N H 8 VILLAGE KHANDSA, GURUGRAM, HARYANA - 122001
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-file-invoice"></i></div>
+            <div class="info-text">
+              <strong>GSTIN</strong>
+              <span class="gst-number">06AAMCM2392L1Z0</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-phone-volume"></i></div>
+            <div class="info-text">
+              <strong>Customer Care</strong>
+              <span class="phone-number">0124-5064647 (50 Lines)</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+            <div class="info-text">
+              <strong>Email</strong>
+              <a href="mailto:admin@millenniumgroup.in" class="mail-link">admin@millenniumgroup.in</a>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="info-text">
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/+919266027938" target="_blank" class="whatsapp-link">+91 92660 27938</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="branch-card">
+        <div class="branch-top">
+        <h3><i class="fa-solid fa-hospital-user"></i> Branch - Panchkula</h3>
+        </div>
+        <div class="branch-body">
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="info-text">
+              <strong>Office Address</strong>
+           PLOT NO 331, BASEMENT INDUSTRIAL AREA PHASE- 1, PANCHKULA HARYANA, PANCHKULA - 133302
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-file-invoice"></i></div>
+            <div class="info-text">
+              <strong>GSTIN</strong>
+              <span class="gst-number">06AAMCM2392L1Z0</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-phone-volume"></i></div>
+            <div class="info-text">
+              <strong>Customer Care</strong>
+              <span class="phone-number">+91 08684805022</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+            <div class="info-text">
+              <strong>Email</strong>
+              <a href="mailto:panchkula@millenniumgroup.in" class="mail-link">panchkula@millenniumgroup.in</a>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="info-text">
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/+919266027922" target="_blank" class="whatsapp-link">+91 92660 27922</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="branch-card">
+        <div class="branch-top">
+                   <h3><i class="fa-solid fa-warehouse"></i> Branch - Dehradun</h3>
+        </div>
+        <div class="branch-body">
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="info-text">
+              <strong>Office Address</strong>
+          PLOT NO 90, MANGLAM WAREHOUSE, TRANSPORT NAGAR, TRANSPORT NAGAR, DEHRADUN, DEHRADUN, UTTARAKHAND - 248002
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-file-invoice"></i></div>
+            <div class="info-text">
+              <strong>GSTIN</strong>
+              <span class="gst-number">05AAMCM2392L1Z2</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-phone-volume"></i></div>
+            <div class="info-text">
+              <strong>Customer Care</strong>
+              <span class="phone-number">+91 9897071961</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+            <div class="info-text">
+              <strong>Email</strong>
+              <a href="mailto:ddn@millenniumgroup.in" class="mail-link">ddn@millenniumgroup.in</a>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="info-text">
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/+919266027923" target="_blank" class="whatsapp-link">+91 92660 27923</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <div class="footer">
+    © 2026 Millennium Medisolutions Pvt Ltd. All Rights Reserved.
+  </div>
+
+</body>
+</html>
