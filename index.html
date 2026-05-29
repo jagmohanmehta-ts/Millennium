@@ -1,882 +1,900 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Millennium Medisolutions</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    :root{
-      --primary:#00a8cc;
-      --secondary:#00c896;
-      --accent:#ffd54f;
-      --danger:#ff6b6b;
-      --dark:#0d2b45;
-      --dark2:#1e4d6b;
-      --glass:rgba(255,255,255,0.55);
-      --glass-border:rgba(255,255,255,0.65);
-      --white:#ffffff;
-      --text:#1b3a4b;
-    }
-
-    body{
-      font-family:'Poppins',sans-serif;
-      color:#12344d;
-      min-height:100vh;
-      overflow-x:hidden;
-      position:relative;
-      background:linear-gradient(-45deg,#f8fcff,#e3f2fd,#d9f4ff,#eef9ff,#f5fcff);
-      background-size:400% 400%;
-      animation:gradientMove 18s ease infinite;
-    }
-
-    @keyframes gradientMove{
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:
-        linear-gradient(rgba(0,120,160,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,120,160,0.04) 1px, transparent 1px);
-      background-size:30px 30px;
-      z-index:0;
-      pointer-events:none;
-    }
-
-    body::after{
-      content:"";
-      position:fixed;
-      top:-30%;
-      left:-20%;
-      width:140%;
-      height:140%;
-      background:linear-gradient(
-        120deg,
-        transparent 20%,
-        rgba(255,255,255,0.40) 40%,
-        transparent 60%
-      );
-      transform:rotate(8deg);
-      animation:lightSweep 12s linear infinite;
-      z-index:0;
-      pointer-events:none;
-    }
-
-    @keyframes lightSweep{
-      0%{transform:translateX(-20%) rotate(8deg);}
-      100%{transform:translateX(20%) rotate(8deg);}
-    }
-
-    .particles{
-      position:fixed;
-      inset:0;
-      overflow:hidden;
-      z-index:0;
-      pointer-events:none;
-    }
-
-    .particles span{
-      position:absolute;
-      bottom:-120px;
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:rgba(0,168,204,0.15);
-      box-shadow:0 0 15px rgba(0,168,204,0.15);
-      animation:particlesMove linear infinite;
-    }
-
-    .particles span:nth-child(1){left:8%; width:8px; height:8px; animation-duration:18s; animation-delay:0s;}
-    .particles span:nth-child(2){left:18%; width:14px; height:14px; animation-duration:24s; animation-delay:3s;}
-    .particles span:nth-child(3){left:30%; width:7px; height:7px; animation-duration:20s; animation-delay:5s;}
-    .particles span:nth-child(4){left:42%; width:12px; height:12px; animation-duration:26s; animation-delay:2s;}
-    .particles span:nth-child(5){left:56%; width:9px; height:9px; animation-duration:22s; animation-delay:4s;}
-    .particles span:nth-child(6){left:68%; width:15px; height:15px; animation-duration:28s; animation-delay:1s;}
-    .particles span:nth-child(7){left:78%; width:8px; height:8px; animation-duration:19s; animation-delay:6s;}
-    .particles span:nth-child(8){left:90%; width:11px; height:11px; animation-duration:25s; animation-delay:2s;}
-
-    @keyframes particlesMove{
-      0%{
-        transform:translateY(0) scale(0.6);
-        opacity:0;
-      }
-      10%{
-        opacity:1;
-      }
-      100%{
-        transform:translateY(-120vh) scale(1.3);
-        opacity:0;
-      }
-    }
-
-    .bg-blobs{
-      position:fixed;
-      inset:0;
-      overflow:hidden;
-      z-index:0;
-      pointer-events:none;
-    }
-
-    .bg-blobs span{
-      position:absolute;
-      border-radius:50%;
-      filter:blur(80px);
-      opacity:0.18;
-      animation:floatBlob 12s infinite ease-in-out;
-    }
-
-    .bg-blobs span:nth-child(1){
-      width:250px;
-      height:250px;
-      background:#7dd3fc;
-      top:5%;
-      left:5%;
-    }
-
-    .bg-blobs span:nth-child(2){
-      width:280px;
-      height:280px;
-      background:#86efac;
-      bottom:8%;
-      left:8%;
-      animation-delay:2s;
-    }
-
-    .bg-blobs span:nth-child(3){
-      width:260px;
-      height:260px;
-      background:#fde68a;
-      top:12%;
-      right:8%;
-      animation-delay:4s;
-    }
-
-    .bg-blobs span:nth-child(4){
-      width:220px;
-      height:220px;
-      background:#fca5a5;
-      bottom:10%;
-      right:10%;
-      animation-delay:1s;
-    }
-
-    @keyframes floatBlob{
-      0%,100%{transform:translate(0,0) scale(1);}
-      50%{transform:translate(20px,-25px) scale(1.05);}
-    }
-
-    .wrapper{
-      position:relative;
-      z-index:1;
-      width:100%;
-      max-width:1380px;
-      margin:auto;
-      padding:30px 20px 100px;
-    }
-
-    .hero{
-      background:rgba(255,255,255,0.58);
-      border:1px solid rgba(255,255,255,0.72);
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:0 20px 60px rgba(0,80,120,0.12);
-      margin-bottom:28px;
-      animation:fadeUp 1.2s ease;
-    }
-
-    .hero-top{
-      height:6px;
-      background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent),var(--danger));
-      background-size:200% 200%;
-      animation:topLineMove 5s linear infinite;
-    }
-
-    @keyframes topLineMove{
-      0%{background-position:0% 50%;}
-      100%{background-position:100% 50%;}
-    }
-
-    .hero-content{
-      display:grid;
-      grid-template-columns:1.2fr 0.8fr;
-      gap:30px;
-      padding:50px;
-      align-items:center;
-    }
-
-    .hero-left .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 18px;
-      border-radius:999px;
-      background:rgba(0,168,204,0.10);
-      border:1px solid rgba(0,168,204,0.18);
-      color:#0f4c5c;
-      font-size:14px;
-      font-weight:600;
-      margin-bottom:18px;
-      animation:fadeUp 1.1s ease;
-    }
-
-    .hero-left .tag i{
-      color:var(--secondary);
-    }
-
-    .hero-left h1{
-      font-size:48px;
-      line-height:1.1;
-      font-weight:800;
-      text-transform:uppercase;
-      margin-bottom:12px;
-      letter-spacing:0.5px;
-      color:#0d2b45;
-      animation:fadeUp 1.3s ease;
-    }
-
-    .sub-badge{
-      display:inline-block;
-      padding:9px 16px;
-      border-radius:14px;
-      background:linear-gradient(90deg,#ffe082,#ffd54f);
-      color:#4e3200;
-      font-weight:700;
-      font-size:14px;
-      margin-bottom:18px;
-      box-shadow:0 10px 25px rgba(255,213,79,0.22);
-      animation:fadeUp 1.5s ease;
-    }
-
-    .line{
-      width:110px;
-      height:5px;
-      border-radius:20px;
-      background:linear-gradient(90deg,var(--primary),var(--secondary));
-      margin:8px 0 24px;
-      animation:linePulse 2.5s infinite ease-in-out;
-    }
-
-    @keyframes linePulse{
-      0%,100%{transform:scaleX(1);}
-      50%{transform:scaleX(1.15);}
-    }
-
-    .hero-left p{
-      font-size:16px;
-      line-height:1.9;
-      color:#35576b;
-      max-width:700px;
-      margin-bottom:30px;
-      animation:fadeUp 1.7s ease;
-    }
-
-    .btn-group{
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      animation:fadeUp 1.9s ease;
-    }
-
-    .btn{
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:16px 24px;
-      border-radius:16px;
-      font-weight:700;
-      transition:0.35s ease;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .btn::before{
-      content:"";
-      position:absolute;
-      top:0;
-      left:-100%;
-      width:100%;
-      height:100%;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent);
-      transition:0.6s;
-    }
-
-    .btn:hover::before{
-      left:100%;
-    }
-
-    .btn-primary{
-      color:#ffffff;
-      background:linear-gradient(135deg,var(--primary),var(--secondary));
-      box-shadow:0 16px 35px rgba(0,168,204,0.22);
-    }
-
-    .btn-primary:hover{
-      transform:translateY(-4px);
-      box-shadow:0 20px 40px rgba(0,168,204,0.28);
-    }
-
-    .btn-secondary{
-      color:#0d2b45;
-      background:rgba(255,255,255,0.62);
-      border:1px solid rgba(0,168,204,0.18);
-    }
-
-    .btn-secondary:hover{
-      transform:translateY(-4px);
-      background:rgba(255,255,255,0.82);
-    }
-
-    .hero-right{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-
-    .hero-stats{
-      width:100%;
-      display:grid;
-      gap:16px;
-    }
-
-    .stat-card{
-      background:rgba(255,255,255,0.60);
-      border:1px solid rgba(255,255,255,0.72);
-      border-radius:22px;
-      padding:22px;
-      box-shadow:0 12px 30px rgba(0,80,120,0.10);
-      transition:0.35s ease;
-      animation:fadeUp 1.2s ease;
-    }
-
-    .stat-card:hover{
-      transform:translateY(-6px);
-      background:rgba(255,255,255,0.75);
-    }
-
-    .stat-card h3{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-size:18px;
-      margin-bottom:8px;
-      color:#0d2b45;
-    }
-
-    .stat-card h3 i{
-      color:var(--secondary);
-    }
-
-    .stat-card p{
-      color:#3c5e72;
-      line-height:1.8;
-      font-size:14px;
-    }
-
-    .section-title{
-      margin:10px 0 20px;
-      text-align:center;
-      animation:fadeUp 1.4s ease;
-    }
-
-    .section-title h2{
-      font-size:34px;
-      font-weight:800;
-      margin-bottom:8px;
-      text-transform:uppercase;
-      color:#0d2b45;
-    }
-
-    .section-title p{
-      color:#456779;
-      font-size:15px;
-    }
-
-    .branch-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:24px;
-    }
-
-    .branch-card{
-      background:rgba(255,255,255,0.58);
-      border:1px solid rgba(255,255,255,0.72);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
-      border-radius:26px;
-      overflow:hidden;
-      box-shadow:0 18px 45px rgba(0,80,120,0.10);
-      transition:0.35s ease;
-      position:relative;
-      animation:fadeUp 1.3s ease;
-    }
-
-    .branch-card:hover{
-      transform:translateY(-8px);
-      box-shadow:0 24px 55px rgba(0,80,120,0.14);
-    }
-
-    .branch-top{
-      padding:22px 24px;
-      background:linear-gradient(135deg,rgba(0,168,204,0.12),rgba(0,200,150,0.08));
-      border-bottom:1px solid rgba(0,168,204,0.10);
-    }
-
-    .branch-label{
-      display:inline-block;
-      padding:8px 14px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:700;
-      color:#0d2b45;
-      background:linear-gradient(90deg,#ffffff,#e0f7ff);
-      margin-bottom:12px;
-    }
-
-    .branch-top h3{
-      font-size:24px;
-      line-height:1.3;
-      font-weight:800;
-      color:#0d2b45;
-    }
-
-    .branch-body{
-      padding:22px 24px 26px;
-    }
-
-    .info-row{
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-      padding:14px 0;
-      border-bottom:1px solid rgba(0,168,204,0.10);
-      transition:0.3s ease;
-    }
-
-    .info-row:hover{
-      transform:translateX(4px);
-    }
-
-    .info-row:last-child{
-      border-bottom:none;
-      padding-bottom:0;
-    }
-
-    .icon-box{
-      width:42px;
-      min-width:42px;
-      height:42px;
-      border-radius:12px;
-      background:rgba(0,168,204,0.10);
-      color:var(--primary);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:16px;
-      transition:0.3s ease;
-    }
-
-    .info-row:hover .icon-box{
-      transform:scale(1.08);
-      background:rgba(0,168,204,0.18);
-    }
-
-    .info-text{
-      font-size:14px;
-      line-height:1.8;
-      color:#35576b;
-      word-break:break-word;
-    }
-
-    .info-text strong{
-      display:block;
-      font-size:15px;
-      color:#0d2b45;
-      margin-bottom:2px;
-    }
-
-    .gst-number{
-      display:inline-block;
-      color:#a10000;
-      background:#fff176;
-      padding:4px 10px;
-      border-radius:8px;
-      font-weight:800;
-      letter-spacing:0.5px;
-      margin-top:4px;
-      animation:gstGlow 1.8s infinite alternate;
-    }
-
-    @keyframes gstGlow{
-      from{box-shadow:0 0 0 rgba(255,241,118,0);}
-      to{box-shadow:0 0 18px rgba(255,241,118,0.45);}
-    }
-
-    .phone-number{
-      color:#0d2b45;
-      font-weight:700;
-    }
-
-    .mail-link{
-      color:#007fa3;
-      text-decoration:none;
-      font-weight:600;
-    }
-
-    .mail-link:hover{
-      text-decoration:underline;
-    }
-
-    .whatsapp-link{
-      color:#0a9c5c;
-      font-weight:700;
-      text-decoration:none;
-      display:inline-block;
-      animation:whatsappPulse 1.5s infinite;
-    }
-
-    @keyframes whatsappPulse{
-      0%{transform:scale(1);}
-      50%{transform:scale(1.07);}
-      100%{transform:scale(1);}
-    }
-
-    .footer{
-      position:fixed;
-      left:0;
-      bottom:0;
-      width:100%;
-      text-align:center;
-      padding:15px 20px;
-      background:rgba(255,255,255,0.75);
-      backdrop-filter:blur(10px);
-      border-top:1px solid rgba(0,168,204,0.12);
-      color:#35576b;
-      font-size:14px;
-      z-index:20;
-    }
-
-    @keyframes fadeUp{
-      from{
-        opacity:0;
-        transform:translateY(30px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-
-    @media(max-width:1100px){
-      .hero-content{
-        grid-template-columns:1fr;
-        padding:40px 28px;
-      }
-
-      .branch-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .hero-left h1{
-        font-size:38px;
-      }
-    }
-
-    @media(max-width:768px){
-      .branch-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero-left h1{
-        font-size:30px;
-      }
-
-      .section-title h2{
-        font-size:26px;
-      }
-
-      .btn{
-        width:100%;
-      }
-    }
-
-    @media(max-width:480px){
-      .wrapper{
-        padding:18px 14px 90px;
-      }
-
-      .hero-content{
-        padding:24px 18px;
-      }
-
-      .branch-top,
-      .branch-body{
-        padding-left:18px;
-        padding-right:18px;
-      }
-
-      .hero-left p{
-        font-size:14px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Millennium Group &mdash; Pharmaceutical Distribution &amp; Supply | Millennium Medisolutions Pvt Ltd, Gurugram</title>
+<meta name="description" content="Millennium Group is a Gurugram-based pharmaceutical distribution and supply business, operating through its flagship company Millennium Medisolutions Private Limited (est. 2018). Authentic medicines, organised storage, dependable trade supply across Haryana and the National Capital Region.">
+<meta name="keywords" content="Millennium Group, Millennium Medisolutions, pharmaceutical distribution Gurugram, pharma distributor Haryana, medicine supplier NCR, pharma wholesale, trade supply">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0E4F47">
+<link rel="canonical" href="https://millenniumgroup.in/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Millennium Group &mdash; Pharmaceutical Distribution &amp; Supply, Gurugram">
+<meta property="og:description" content="Pharmaceutical distribution &amp; supply group based in Gurugram, operating through Millennium Medisolutions Private Limited since 2018.">
+<meta property="og:locale" content="en_IN">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Millennium Medisolutions Private Limited",
+  "alternateName":"Millennium Group",
+  "url":"https://millenniumgroup.in/",
+  "foundingDate":"2018-11-20",
+  "legalName":"Millennium Medisolutions Private Limited",
+  "identifier":[{"@type":"PropertyValue","propertyID":"CIN","value":"U74999HR2018PTC076964"},{"@type":"PropertyValue","propertyID":"GSTIN","value":"06AAMCM2392L1Z0"},{"@type":"PropertyValue","propertyID":"LEI","value":"335800R51P6A7WNTWD75"}],
+  "address":{"@type":"PostalAddress","streetAddress":"Khasra No 672, 673/2, 678, 679, Village Khandsa, Near Hero Honda Chowk, NH-8","addressLocality":"Gurugram","addressRegion":"Haryana","postalCode":"122001","addressCountry":"IN"},
+  "areaServed":["Haryana","Delhi NCR","India"],
+  "numberOfEmployees":"162"
+}
+</script>
+<style>
+:root{
+  --paper:#F5F2EA;
+  --paper-2:#ECE8DC;
+  --surface:#FDFCF7;
+  --ink:#11171F;
+  --ink-2:#2E3744;
+  --muted:#6D7682;
+  --rule:#D9D3C2;
+  --rule-2:#EBE6D5;
+  --teal:#0E4F47;
+  --teal-deep:#08332E;
+  --teal-light:#1A6E64;
+  --teal-tint:#DDE8E6;
+  --gold:#B58E2C;
+  --gold-deep:#876820;
+  --gold-tint:#F1E7C9;
+  --r:6px;
+  --r-lg:12px;
+  --maxw:1240px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Inter",-apple-system,system-ui,sans-serif;
+  font-size:16px;line-height:1.62;color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:var(--teal);text-decoration:none}
+a:hover{color:var(--gold-deep)}
+
+/* ===== LOGO / BRAND ===== */
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-bg{
+  display:inline-block;
+  background-image:url("data:image/png;base64,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");
+  background-size:contain;background-repeat:no-repeat;background-position:center;
+}
+.logo-nav{height:50px;width:50px;flex-shrink:0}
+.logo-hero{height:160px;width:160px}
+.logo-footer{height:50px;width:50px;flex-shrink:0}
+.brand-text{display:flex;flex-direction:column;line-height:1.05}
+.brand-name{font-family:"DM Serif Display",serif;font-size:22px;color:var(--ink);letter-spacing:-0.01em;line-height:1}
+.brand-name em{font-style:italic;color:var(--teal)}
+.brand-sub{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--muted);margin-top:5px;font-weight:500}
+
+/* page system */
+.page{display:none}
+.page.active{display:block}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:60;background:rgba(245,242,234,0.94);
+  backdrop-filter:saturate(150%) blur(12px);-webkit-backdrop-filter:saturate(150%) blur(12px);
+  border-bottom:1px solid var(--rule)}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{font-family:"Inter",sans-serif;font-size:13.5px;font-weight:500;color:var(--ink-2);
+  padding:9px 14px;border-radius:var(--r);transition:.15s;letter-spacing:0.01em}
+.nav-links a:hover{color:var(--teal);background:var(--teal-tint)}
+.nav-links a.active{color:var(--teal);background:var(--teal-tint);font-weight:600}
+.nav-cta{margin-left:8px;background:var(--ink) !important;color:#fff !important;
+  padding:11px 22px !important;border-radius:var(--r);font-weight:600 !important;font-size:13px !important;
+  letter-spacing:0.02em;display:inline-flex;align-items:center;gap:8px;border-bottom:2px solid var(--gold)}
+.nav-cta:hover{background:var(--teal) !important;border-bottom-color:var(--gold)}
+.hamburger{display:none;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:9px 11px;cursor:pointer}
+.hamburger span{display:block;width:20px;height:2px;background:var(--ink);margin:4px 0;transition:.2s;border-radius:2px}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* containers */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+.section{padding:104px 0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:var(--r);
+  font-family:"Inter",sans-serif;font-size:14px;font-weight:600;cursor:pointer;
+  transition:.16s;border:1.5px solid transparent;letter-spacing:0.01em}
+.btn-primary{background:var(--ink);color:#fff;border-color:var(--ink);border-bottom:2px solid var(--gold)}
+.btn-primary:hover{background:var(--teal);border-color:var(--teal);border-bottom-color:var(--gold)}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+.btn-gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn-gold:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
+.btn-on-dark{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.btn-on-dark:hover{background:#fff;color:var(--teal-deep);border-color:#fff}
+.btn-ghost-light{background:transparent;color:#fff;border-color:rgba(255,255,255,0.45)}
+.btn-ghost-light:hover{background:#fff;color:var(--teal-deep)}
+.btn .ar{transition:transform .16s}
+.btn:hover .ar{transform:translateX(3px)}
+
+/* section header */
+.sec-head{margin-bottom:68px;max-width:760px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:11px;
+  font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:22px;
+}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--gold)}
+.sec-title{font-family:"DM Serif Display",serif;font-weight:400;
+  font-size:50px;line-height:1.06;letter-spacing:-0.02em;color:var(--ink)}
+.sec-title em{font-style:italic;color:var(--teal)}
+.sec-title .gold{font-style:normal;color:var(--gold-deep)}
+.sec-lede{font-size:17px;color:var(--ink-2);margin-top:20px;line-height:1.65;max-width:640px}
+
+/* hero */
+.hero{padding:88px 0 96px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:0;right:0;width:50%;height:100%;
+  background:radial-gradient(ellipse at center right,var(--teal-tint),transparent 65%);pointer-events:none;opacity:0.7}
+.hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:72px;align-items:center;position:relative}
+.hero-meta{display:flex;align-items:center;gap:16px;margin-bottom:26px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+.hero-meta b{color:var(--teal);font-weight:600}
+.hero-meta::after{content:"";flex:1;height:1px;background:var(--rule);max-width:160px}
+.h1{font-family:"DM Serif Display",serif;font-weight:400;
+  font-size:72px;line-height:1.02;letter-spacing:-0.025em;color:var(--ink);margin-bottom:28px}
+.h1 em{font-style:italic;color:var(--teal)}
+.h1 .gold{font-style:normal;color:var(--gold-deep)}
+.lede{font-size:19px;line-height:1.6;color:var(--ink-2);max-width:560px;margin-bottom:38px}
+.cta-row{display:flex;gap:13px;flex-wrap:wrap}
+
+/* hero card / company profile */
+.hero-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);
+  overflow:hidden;box-shadow:0 30px 60px -38px rgba(17,23,31,0.32)}
+.hero-card-head{background:var(--ink);color:#fff;padding:22px 26px;display:flex;flex-direction:column;gap:6px;
+  border-bottom:2px solid var(--gold);position:relative;overflow:hidden}
+.hero-card-head::after{content:"";position:absolute;right:-60px;top:-60px;width:160px;height:160px;
+  border-radius:50%;border:18px solid rgba(255,255,255,0.05)}
+.hcc-tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;position:relative;z-index:1}
+.hcc-name{font-family:"DM Serif Display",serif;font-size:24px;color:#fff;line-height:1.15;letter-spacing:-0.01em;position:relative;z-index:1}
+.hcc-name em{font-style:italic;color:var(--gold-tint)}
+.hero-card-body{padding:4px 0}
+.hcr{display:flex;justify-content:space-between;gap:18px;padding:14px 26px;border-bottom:1px solid var(--rule-2)}
+.hcr:last-child{border-bottom:none}
+.hcr-key{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.hcr-val{font-size:13.5px;font-weight:600;color:var(--ink);text-align:right;line-height:1.4}
+
+/* metrics strip */
+.metrics{background:var(--surface);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.metrics-in{max-width:var(--maxw);margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(4,1fr)}
+.metric{padding:38px 28px;border-right:1px solid var(--rule);position:relative}
+.metric:last-child{border-right:none}
+.metric-key{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:10px}
+.metric-num{font-family:"DM Serif Display",serif;font-weight:400;font-size:46px;color:var(--ink);line-height:1;letter-spacing:-0.025em}
+.metric-num sub{font-size:18px;color:var(--gold);font-weight:400;vertical-align:baseline;font-family:"DM Serif Display",serif;font-style:italic;margin-left:4px}
+.metric-sub{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.45}
+
+/* offer cards */
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule)}
+.cap{padding:38px 32px 34px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:.18s;position:relative;background:var(--paper)}
+.cap:nth-child(3n){border-right:none}
+.cap:hover{background:var(--surface)}
+.cap-no{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;color:var(--gold-deep);letter-spacing:0.15em;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center}
+.cap-no::after{content:"";flex:1;height:1px;background:var(--rule);margin-left:14px}
+.cap-ic{width:42px;height:42px;border-radius:50%;background:var(--teal-tint);display:grid;place-items:center;margin-bottom:18px;color:var(--teal)}
+.cap-ic svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.6}
+.cap h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:24px;color:var(--ink);margin-bottom:10px;line-height:1.2;letter-spacing:-0.015em}
+.cap h3 em{font-style:italic;color:var(--teal)}
+.cap p{font-size:14.5px;color:var(--ink-2);line-height:1.62}
+
+/* process — dark editorial */
+.process{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.process::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold)}
+.process .eyebrow{color:var(--gold)}
+.process .eyebrow::before{background:var(--gold)}
+.process .sec-title{color:#fff}
+.process .sec-title em{color:var(--gold-tint)}
+.process .sec-lede{color:rgba(255,255,255,0.74)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,0.18);margin-top:24px}
+.proc{padding:36px 28px 30px;border-right:1px solid rgba(255,255,255,0.13)}
+.proc:last-child{border-right:none}
+.proc-no{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;color:var(--gold);letter-spacing:0.15em;margin-bottom:24px}
+.proc h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:22px;color:#fff;margin-bottom:10px;line-height:1.2;letter-spacing:-0.015em}
+.proc p{font-size:14px;color:rgba(255,255,255,0.74);line-height:1.62}
+
+/* split feature */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.split-visual{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);
+  padding:52px 44px;position:relative;overflow:hidden}
+.split-visual::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+.split-quote{font-family:"DM Serif Display",serif;font-style:italic;font-size:28px;line-height:1.34;color:var(--ink);letter-spacing:-0.015em;margin-bottom:22px;position:relative}
+.split-quote::before{content:"\201C";position:absolute;left:-26px;top:-14px;font-size:80px;color:var(--gold);font-style:normal;line-height:1}
+.split-cite{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);font-weight:500;padding-top:18px;border-top:1px solid var(--rule)}
+.split-cite b{color:var(--ink);font-weight:600}
+.split-prose .sec-title{font-size:40px}
+.split-list{margin-top:28px;display:flex;flex-direction:column;gap:18px}
+.split-li{display:flex;gap:18px;align-items:flex-start}
+.split-li .num{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;color:var(--gold);letter-spacing:0.1em;padding-top:4px;flex-shrink:0;min-width:32px}
+.split-li p{font-size:15.5px;color:var(--ink-2);line-height:1.6}
+.split-li b{color:var(--ink);font-weight:600}
+
+/* CTA band */
+.cta-band{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);
+  padding:64px 64px;display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:center;
+  position:relative;overflow:hidden}
+.cta-band::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+.cta-band::after{content:"";position:absolute;right:-100px;bottom:-100px;width:340px;height:340px;
+  border-radius:50%;background:radial-gradient(circle,var(--teal-tint),transparent 70%)}
+.cta-band .eyebrow{margin-bottom:18px}
+.cta-headline{font-family:"DM Serif Display",serif;font-weight:400;font-size:40px;line-height:1.1;color:var(--ink);margin-bottom:14px;letter-spacing:-0.02em;position:relative;z-index:1}
+.cta-headline em{font-style:italic;color:var(--teal)}
+.cta-band p{font-size:15.5px;color:var(--ink-2);line-height:1.62;position:relative;z-index:1;max-width:520px}
+.cta-actions{display:flex;flex-direction:column;gap:11px;position:relative;z-index:1}
+.cta-actions .btn{justify-content:center}
+
+/* page header */
+.page-header{padding:96px 0 80px;border-bottom:1px solid var(--rule);background:var(--surface);position:relative;overflow:hidden}
+.page-header::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+.page-header::after{content:"";position:absolute;right:-150px;bottom:-180px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,var(--teal-tint),transparent 72%)}
+.page-header .inner{position:relative}
+.page-header .eyebrow{margin-bottom:24px}
+.page-header h1{font-family:"DM Serif Display",serif;font-weight:400;font-size:68px;line-height:1.04;letter-spacing:-0.025em;color:var(--ink)}
+.page-header h1 em{font-style:italic;color:var(--teal)}
+.page-header h1 .gold{font-style:normal;color:var(--gold-deep)}
+.page-header .lede{margin-top:20px;max-width:740px;font-size:18px;color:var(--ink-2);line-height:1.6}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.1fr 0.95fr;gap:72px;align-items:start}
+.about-prose p{font-size:17px;line-height:1.78;color:var(--ink-2);margin-bottom:18px}
+.about-prose p.lead{font-family:"DM Serif Display",serif;font-style:italic;font-size:26px;line-height:1.4;color:var(--ink);font-weight:400;letter-spacing:-0.01em}
+.profile{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden}
+.profile-head{background:var(--ink);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--gold)}
+.profile-head span{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase}
+.profile-head .tag{background:var(--teal);padding:5px 11px;border-radius:100px;font-size:9.5px;color:#fff}
+.profile table{width:100%;border-collapse:collapse}
+.profile td{padding:14px 24px;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.profile tr:last-child td{border-bottom:none}
+.profile td:first-child{width:38%;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.profile td:last-child{font-size:14px;color:var(--ink);font-weight:600}
+.profile td:last-child small{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:3px;letter-spacing:0}
+.note-line{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--muted);
+  margin-top:18px;line-height:1.55;padding-left:14px;border-left:2px solid var(--gold);letter-spacing:0.04em}
+
+/* directors */
+.dirs{margin-top:48px}
+.dirs-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.dirs-head h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:30px;color:var(--ink);letter-spacing:-0.02em}
+.dirs-head h3 em{font-style:italic;color:var(--teal)}
+.dirs-head span{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+.dirs-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.dir{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:30px 28px;border-top:2px solid var(--gold)}
+.dir-num{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;color:var(--teal);letter-spacing:0.12em;margin-bottom:12px}
+.dir h4{font-family:"DM Serif Display",serif;font-weight:400;font-size:22px;color:var(--ink);margin-bottom:6px;letter-spacing:-0.015em}
+.dir .role{font-family:"Inter",sans-serif;font-size:13px;color:var(--teal);font-weight:600;letter-spacing:0.02em;margin-bottom:14px}
+.dir p{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.dir p b{color:var(--ink)}
+
+/* values */
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule);margin-top:60px}
+.value{padding:36px 30px 32px;border-right:1px solid var(--rule);position:relative}
+.value:last-child{border-right:none}
+.value .vn{font-family:"DM Serif Display",serif;font-style:italic;font-size:32px;color:var(--gold);line-height:1;margin-bottom:18px}
+.value h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:22px;color:var(--ink);margin-bottom:10px;letter-spacing:-0.015em}
+.value p{font-size:14px;color:var(--ink-2);line-height:1.62}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.svc{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);
+  padding:36px 34px;display:grid;grid-template-columns:48px 1fr;gap:26px;align-items:start;transition:.16s;position:relative;overflow:hidden}
+.svc::before{content:"";position:absolute;top:0;left:0;right:0;height:0;background:var(--gold);transition:height .2s}
+.svc:hover::before{height:3px}
+.svc-mark{width:48px;height:48px;border-radius:50%;background:var(--teal-tint);display:grid;place-items:center;color:var(--teal);border:1.5px solid var(--teal)}
+.svc-mark svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7}
+.svc-body h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:24px;color:var(--ink);margin-bottom:10px;letter-spacing:-0.015em}
+.svc-body p{font-size:14.5px;color:var(--ink-2);line-height:1.64;margin-bottom:14px}
+.svc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.svc-tag{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:100px}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.level{padding:38px 30px;border-right:1px solid var(--rule)}
+.level:last-child{border-right:none}
+.level-tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:14px}
+.level h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:24px;color:var(--ink);margin-bottom:10px;letter-spacing:-0.015em}
+.level p{font-size:14px;color:var(--ink-2);line-height:1.64}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.locations-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:22px}
+.loc-row{display:flex;align-items:flex-start;gap:11px;padding-top:11px;border-top:1px solid var(--rule-2)}
+.loc-row:first-of-type{border-top:none;padding-top:0}
+.loc-row .lbl{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:600;min-width:78px;padding-top:3px;flex-shrink:0}
+.loc-row .val{font-size:14px;line-height:1.55;color:var(--ink-2);flex:1}
+.loc-row .val a{color:var(--teal);font-weight:600;word-break:break-word}
+.loc-row .val strong{color:var(--ink);font-weight:600;letter-spacing:0.02em}
+.contact-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);
+  padding:34px 32px;display:flex;flex-direction:column;gap:12px;border-top:2px solid var(--gold)}
+.contact-ic{width:44px;height:44px;border-radius:50%;background:var(--teal-tint);display:grid;place-items:center;color:var(--teal);border:1.5px solid var(--teal)}
+.contact-ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7}
+.contact-tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.contact-card h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:24px;color:var(--ink);letter-spacing:-0.015em}
+.contact-card p,.contact-card a{font-size:14.5px;line-height:1.62;color:var(--ink-2)}
+.contact-card a{color:var(--teal);font-weight:600;word-break:break-word}
+.contact-card .big{font-family:"DM Serif Display",serif;font-size:24px;font-weight:400;color:var(--ink);letter-spacing:-0.015em}
+.contact-card .big a{color:var(--ink)}
+
+/* faq */
+.faq-list{border-top:1px solid var(--rule)}
+.faq{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;list-style:none;padding:26px 0;display:grid;grid-template-columns:60px 1fr 36px;align-items:center;gap:22px}
+.faq summary::-webkit-details-marker{display:none}
+.faq-no{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--gold-deep);font-weight:600;letter-spacing:0.12em}
+.faq-q{font-family:"DM Serif Display",serif;font-size:22px;font-weight:400;color:var(--ink);line-height:1.3;letter-spacing:-0.015em}
+.faq-tg{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);display:grid;place-items:center;transition:.18s;background:var(--surface);position:relative}
+.faq-tg::before,.faq-tg::after{content:"";position:absolute;background:var(--teal);border-radius:2px}
+.faq-tg::before{width:12px;height:2px}
+.faq-tg::after{width:2px;height:12px}
+.faq[open] .faq-tg{background:var(--teal);transform:rotate(135deg)}
+.faq[open] .faq-tg::before,.faq[open] .faq-tg::after{background:#fff}
+.faq[open] .faq-q{color:var(--teal);font-style:italic}
+.faq-a{padding:0 0 28px 82px;font-size:15.5px;line-height:1.72;color:var(--ink-2)}
+.faq-a a{font-weight:600}
+
+/* policy */
+.policy-grid{display:grid;grid-template-columns:250px 1fr;gap:64px;align-items:start}
+.policy-toc{position:sticky;top:96px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:26px 24px;border-top:2px solid var(--gold)}
+.policy-toc h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;padding-bottom:13px;border-bottom:1px solid var(--rule)}
+.policy-toc ol{list-style:none;counter-reset:t}
+.policy-toc li{counter-increment:t;padding:7px 0;font-size:12.5px;color:var(--ink-2);display:flex;gap:11px;font-weight:500;line-height:1.45}
+.policy-toc li::before{content:counter(t,decimal-leading-zero);font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--gold-deep);font-weight:600;min-width:22px}
+.policy-body section{margin-bottom:42px;padding-bottom:42px;border-bottom:1px solid var(--rule)}
+.policy-body section:last-child{border-bottom:none}
+.policy-body h2{font-family:"DM Serif Display",serif;font-weight:400;font-size:30px;color:var(--ink);margin-bottom:16px;display:flex;align-items:baseline;gap:14px;letter-spacing:-0.02em}
+.policy-body h2 .num{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--gold-deep);font-weight:600}
+.policy-body p,.policy-body li{font-size:15.5px;line-height:1.74;color:var(--ink-2);margin-bottom:13px}
+.policy-body ul{padding-left:22px;margin-bottom:13px}
+.policy-body strong{color:var(--ink);font-weight:600}
+
+/* footer */
+.footer{background:var(--ink);color:rgba(255,255,255,0.7);padding:72px 0 26px;position:relative}
+.footer::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--gold)}
+.footer-grid{max-width:var(--maxw);margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:52px}
+.foot-brand-row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.foot-name{font-family:"DM Serif Display",serif;font-size:20px;color:#fff;font-weight:400;line-height:1.2;letter-spacing:-0.01em}
+.foot-tag{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--gold);letter-spacing:0.16em;text-transform:uppercase;margin-top:6px;font-weight:500}
+.foot-desc{font-size:13.5px;line-height:1.66;color:rgba(255,255,255,0.58);max-width:320px}
+.foot-col h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:11px;border-bottom:1px solid rgba(255,255,255,0.13)}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col a,.foot-col p{font-size:13px;color:rgba(255,255,255,0.66);line-height:1.55;cursor:pointer}
+.foot-col a:hover{color:var(--gold)}
+.foot-bottom{max-width:var(--maxw);margin:48px auto 0;padding:24px 32px 0;border-top:1px solid rgba(255,255,255,0.13);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:0.1em;color:rgba(255,255,255,0.42)}
+.foot-bottom b{color:rgba(255,255,255,0.86);font-weight:600}
+
+/* responsive */
+@media (max-width:1080px){
+  .hero-grid{grid-template-columns:1fr;gap:48px}
+  .h1{font-size:54px}
+  .cap-grid{grid-template-columns:repeat(2,1fr)}
+  .cap:nth-child(3n){border-right:1px solid var(--rule)}
+  .cap:nth-child(2n){border-right:none}
+  .proc-grid{grid-template-columns:repeat(2,1fr);gap:0}
+  .proc:nth-child(2n){border-right:none}
+  .proc:nth-child(1),.proc:nth-child(2){border-bottom:1px solid rgba(255,255,255,0.13)}
+  .metrics-in{grid-template-columns:1fr 1fr}
+  .metric:nth-child(2){border-right:none}
+  .metric:nth-child(1),.metric:nth-child(2){border-bottom:1px solid var(--rule)}
+  .split,.about-grid,.contact-grid,.locations-grid,.svc-grid,.dirs-grid{grid-template-columns:1fr}
+  .values-grid,.levels{grid-template-columns:1fr}
+  .value,.level{border-right:none;border-bottom:1px solid var(--rule)}
+  .value:last-child,.level:last-child{border-bottom:none}
+  .cta-band{grid-template-columns:1fr;padding:48px 36px;gap:32px}
+  .policy-grid{grid-template-columns:1fr}
+  .policy-toc{position:static}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .nav-inner{padding:12px 18px}
+  .brand-sub{display:none}
+  .brand-name{font-size:18px}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;background:var(--paper);border-bottom:1px solid var(--rule);padding:12px 18px 20px}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:13px 14px;font-size:14.5px}
+  .nav-cta{margin:6px 0 0 !important;text-align:center;justify-content:center}
+  .hamburger{display:block}
+  .wrap{padding:0 18px}
+  .section{padding:64px 0}
+  .hero{padding:52px 0 64px}
+  .h1{font-size:40px}
+  .lede{font-size:16.5px}
+  .sec-title{font-size:32px}
+  .cap-grid{grid-template-columns:1fr}
+  .cap{border-right:none !important}
+  .metrics-in{grid-template-columns:1fr}
+  .metric{border-right:none;border-bottom:1px solid var(--rule)}
+  .metric:last-child{border-bottom:none}
+  .metric-num{font-size:38px}
+  .page-header{padding:64px 0 52px}
+  .page-header h1{font-size:40px}
+  .cta-headline{font-size:28px}
+  .cta-band{padding:36px 24px}
+  .footer-grid{grid-template-columns:1fr}
+  .policy-body h2{font-size:23px}
+  .faq-q{font-size:17px}
+  .faq summary{grid-template-columns:46px 1fr 30px;gap:14px}
+  .faq-a{padding-left:60px}
+  .svc{grid-template-columns:1fr;gap:18px}
+}
+</style>
 </head>
 <body>
 
-  <div class="particles">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#home" data-page="home">
+      <span class="logo-bg logo-nav" role="img" aria-label="Millennium Group logo"></span>
+      <span class="brand-text">
+        <span class="brand-name">Millennium <em>Group</em></span>
+        <span class="brand-sub">Gurugram &middot; Panchkula &middot; Dehradun</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#about" data-page="about">About</a>
+      <a href="#services" data-page="services">What We Offer</a>
+      <a href="#contact" data-page="contact">Contact</a>
+      <a href="#faq" data-page="faq">FAQ</a>
+      <a class="nav-cta" href="#contact" data-page="contact">Get in Touch</a>
+    </div>
+    <button class="hamburger" id="ham" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-meta"><b>Estd. 2018</b> &middot; Gurugram &middot; Panchkula &middot; Dehradun</div>
+          <h1 class="h1">Pharmaceutical distribution, <em>built on</em> <span class="gold">discipline.</span></h1>
+          <p class="lede">Millennium Group is a Gurugram-based pharmaceutical distribution and supply business, operating through its flagship company <strong>Millennium Medisolutions Private Limited</strong>. Authentic medicines, careful storage, and dependable trade supply &mdash; the work, done seriously, since 2018.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact" data-page="contact">Speak to our office <span class="ar">&rarr;</span></a>
+            <a class="btn btn-outline" href="#services" data-page="services">What We Offer <span class="ar">&rarr;</span></a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <div class="hero-card-head">
+            <span class="hcc-tag">Group Profile</span>
+            <span class="hcc-name">Millennium <em>Medisolutions</em><br>Private Limited</span>
+          </div>
+          <div class="hero-card-body">
+            <div class="hcr"><span class="hcr-key">Business</span><span class="hcr-val">Pharma Distribution &amp; Supply</span></div>
+            <div class="hcr"><span class="hcr-key">Established</span><span class="hcr-val">20 November 2018</span></div>
+            <div class="hcr"><span class="hcr-key">Constitution</span><span class="hcr-val">Private Limited Company</span></div>
+            <div class="hcr"><span class="hcr-key">Headquarters</span><span class="hcr-val">Gurugram, Haryana</span></div>
+            <div class="hcr"><span class="hcr-key">CIN</span><span class="hcr-val">U74999HR2018PTC076964</span></div>
+            <div class="hcr"><span class="hcr-key">GSTIN</span><span class="hcr-val">06AAMCM2392L1Z0</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div class="metrics">
+    <div class="metrics-in">
+      <div class="metric"><div class="metric-key">Established</div><div class="metric-num">2018<sub>—</sub></div><div class="metric-sub">Seven years of pharmaceutical trade</div></div>
+      <div class="metric"><div class="metric-key">Team</div><div class="metric-num">162<sub>+</sub></div><div class="metric-sub">Professionals across the group</div></div>
+      <div class="metric"><div class="metric-key">Region</div><div class="metric-num">NCR<sub>+</sub></div><div class="metric-sub">Haryana, Delhi NCR &amp; beyond</div></div>
+      <div class="metric"><div class="metric-key">Form</div><div class="metric-num">Pvt<sub>Ltd</sub></div><div class="metric-sub">Active &middot; RoC Delhi registered</div></div>
+    </div>
   </div>
 
-  <div class="bg-blobs">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What We Offer</span>
+        <h2 class="sec-title">A pharmaceutical practice built around <em>trust,</em> <span class="gold">scale</span> and reliability.</h2>
+        <p class="sec-lede">Pharmaceutical distribution is a chain of careful steps. We organise the group's work around the things that matter most to the manufacturers we represent and the trade we serve.</p>
+      </div>
+    </div>
+    <div class="wrap" style="padding:0">
+      <div class="cap-grid wrap">
+        <div class="cap"><div class="cap-no"><span>01 / Offer</span></div><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></div><h3>Wholesale Distribution</h3><p>Bulk supply of branded and generic medicines to retail pharmacies, hospitals and institutional buyers across Haryana and the wider NCR.</p></div>
+        <div class="cap"><div class="cap-no"><span>02 / Offer</span></div><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v5c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Authenticity &amp; Traceability</h3><p>Stock sourced exclusively through legitimate supply channels, supplied in original manufacturer packaging with intact batch and expiry information.</p></div>
+        <div class="cap"><div class="cap-no"><span>03 / Offer</span></div><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M14 14V5a2 2 0 00-4 0v9a4 4 0 104 0z"/></svg></div><h3>Storage &amp; Stock Management</h3><p>Organised warehousing with attention to storage conditions, stock rotation and shelf-life &mdash; protecting product integrity from intake to dispatch.</p></div>
+        <div class="cap"><div class="cap-no"><span>04 / Offer</span></div><div class="cap-ic"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="13" height="10"/><path d="M15 10h4l3 3v4h-7"/><circle cx="6.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg></div><h3>Order Fulfilment</h3><p>Accurate picking, checking against batch and expiry, and timely dispatch of trade orders to the pharmacies and providers we serve.</p></div>
+        <div class="cap"><div class="cap-no"><span>05 / Offer</span></div><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M12 8l-3-2-5 4v6l3 2 3-2M12 8l3-2 5 4v6l-3 2-4-3M12 8v8"/></svg></div><h3>Trade Relationships</h3><p>Long-term, service-led relationships with the pharmacies, hospitals and providers across our service region.</p></div>
+        <div class="cap"><div class="cap-no"><span>06 / Offer</span></div><div class="cap-ic"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h6"/></svg></div><h3>Compliance &amp; Documentation</h3><p>GST-compliant invoicing and documentation maintained against drug-licence verification and the broader regulatory framework.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">How We Operate</span>
+        <h2 class="sec-title">From <em>supplier</em> to the pharmacy counter.</h2>
+        <p class="sec-lede">A clear four-step supply line keeps medicines moving reliably from manufacturers to the healthcare providers who dispense them.</p>
+      </div>
+      <div class="proc-grid">
+        <div class="proc"><div class="proc-no">01 / Step</div><h3>Sourcing</h3><p>Stock is procured from manufacturers and authorised suppliers through legitimate, documented channels.</p></div>
+        <div class="proc"><div class="proc-no">02 / Step</div><h3>Storage</h3><p>Medicines are held in organised warehousing with attention to storage norms and stock rotation.</p></div>
+        <div class="proc"><div class="proc-no">03 / Step</div><h3>Order &amp; Pick</h3><p>Trade orders are picked, checked against batch and expiry, and prepared for dispatch.</p></div>
+        <div class="proc"><div class="proc-no">04 / Step</div><h3>Delivery</h3><p>Orders are delivered to pharmacies, hospitals and institutions &mdash; reliably and on schedule.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-visual">
+          <p class="split-quote">A pharmaceutical distributor's job is to be unremarkably reliable. The right medicine, in the right hands, at the right time &mdash; every single day. That is the standard the group sets for itself.</p>
+          <div class="split-cite"><b>Millennium Group</b> &middot; Operating Philosophy</div>
+        </div>
+        <div class="split-prose">
+          <span class="eyebrow">Who We Serve</span>
+          <h2 class="sec-title">A dependable link in the <em>healthcare</em> supply chain.</h2>
+          <div class="split-list">
+            <div class="split-li"><span class="num">A /</span><p><b>Pharmacies.</b> Independent chemists and pharmacy outlets across Haryana and NCR &mdash; consistent stock and dependable resupply.</p></div>
+            <div class="split-li"><span class="num">B /</span><p><b>Hospitals &amp; Institutions.</b> Institutional buyers served with organised bulk fulfilment and documented invoicing.</p></div>
+            <div class="split-li"><span class="num">C /</span><p><b>Clinics &amp; Doctors.</b> Reliable supply of the medicines that day-to-day patient care depends on.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <span class="eyebrow">Office &middot; Gurugram</span>
+          <h3 class="cta-headline">Open a trade account or place a <em>stock enquiry.</em></h3>
+          <p>For trade enquiries, new account opening, product availability or delivery scheduling, our office in Gurugram is the fastest point of contact. We will be glad to help.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="#contact" data-page="contact">Contact the Office <span class="ar">&rarr;</span></a>
+          <a class="btn btn-outline" href="#about" data-page="about">About the Group <span class="ar">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-about">
+  <section class="page-header"><div class="wrap"><div class="inner">
+    <span class="eyebrow">About &mdash; 02</span>
+    <h1>A pharmaceutical <em>distribution</em> group, built quietly and at <span class="gold">scale.</span></h1>
+    <p class="lede">Millennium Group operates through its flagship company <strong>Millennium Medisolutions Private Limited</strong> &mdash; a Private Limited company incorporated in 2018 and headquartered in Gurugram, Haryana.</p>
+  </div></div></section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-prose">
+          <p class="lead">Pharmaceutical distribution is a business of unglamorous, day-after-day reliability. The group's purpose is to be exactly that, for the manufacturers we represent and the trade we serve.</p>
+          <p>The group was established in 2018 with the incorporation of Millennium Medisolutions Private Limited, registered with the Registrar of Companies, Delhi (CIN U74999HR2018PTC076964). Operations are run from the company's premises at Village Khandsa, off NH-8 near Hero Honda Chowk, Gurugram &mdash; a location chosen for its logistics reach into Haryana and the wider National Capital Region.</p>
+          <p>Today the business employs around 162 professionals across warehousing, fulfilment, accounts, sales and the administrative functions that keep a regulated distribution operation working. Through its trade and supply network, the group reaches pharmacies, hospitals and institutional buyers across the region.</p>
+          <p>Across both branded and generic medicine ranges, the group's standard is constant: stock that is authentic, correctly handled, properly documented, and delivered when it is needed.</p>
+        </div>
+        <div>
+          <div class="eyebrow">Statutory Profile</div>
+          <div class="profile" style="margin-top:14px">
+            <div class="profile-head"><span>Millennium Medisolutions &mdash; Profile</span><span class="tag">Active</span></div>
+            <table>
+              <tr><td>Legal Name</td><td>Millennium Medisolutions Private Limited</td></tr>
+              <tr><td>Brand</td><td>Millennium Group</td></tr>
+              <tr><td>Incorporated</td><td>20 November 2018</td></tr>
+              <tr><td>Constitution</td><td>Private Limited Company</td></tr>
+              <tr><td>CIN</td><td>U74999HR2018PTC076964 <small>RoC Delhi &middot; Registration No. 076964</small></td></tr>
+              <tr><td>GSTIN</td><td>06AAMCM2392L1Z0 <small>State code 06 &mdash; Haryana</small></td></tr>
+              <tr><td>LEI</td><td>335800R51P6A7WNTWD75</td></tr>
+              <tr><td>Capital</td><td>Authorised &amp; Paid-up: &#8377;1,00,000</td></tr>
+              <tr><td>Listing</td><td>Unlisted</td></tr>
+              <tr><td>Registered Address</td><td>Khasra No 672, 673/2, 678, 679, Village Khandsa, Near Hero Honda Chowk, NH-8, Gurugram, Haryana &mdash; 122001</td></tr>
+            </table>
+          </div>
+          <p class="note-line">Profile reflects information from the Ministry of Corporate Affairs (MCA) and the GST Network. Latest annual financials filed for FY ending 31 March 2025.</p>
+        </div>
+      </div>
+
+      <div class="dirs">
+        <div class="dirs-head"><h3>Board of <em>Directors</em></h3><span>As on Public Record</span></div>
+        <div class="dirs-grid">
+          <div class="dir">
+            <div class="dir-num">DIRECTOR / 01</div>
+            <h4>Shitiz Sukhija</h4>
+            <div class="role">Whole-Time Director</div>
+            <p>Founding director, associated with the company since incorporation on <b>20 November 2018</b>. Holds the executive leadership of the operating company.</p>
+          </div>
+          <div class="dir">
+            <div class="dir-num">DIRECTOR / 02</div>
+            <h4>Amar Nath Lalka</h4>
+            <div class="role">Additional Director</div>
+            <p>Appointed to the board on <b>26 May 2025</b>, bringing additional governance and strategic oversight to the company.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="values-grid">
+        <div class="value"><div class="vn">i.</div><h3>Authenticity</h3><p>Every medicine the group supplies moves in its original manufacturer packaging, sourced through legitimate channels with intact batch and expiry information.</p></div>
+        <div class="value"><div class="vn">ii.</div><h3>Discipline</h3><p>Organised storage, careful stock rotation, accurate picking and disciplined documentation &mdash; the boring details that keep a distribution business credible.</p></div>
+        <div class="value"><div class="vn">iii.</div><h3>Reliability</h3><p>Day after day, year after year. That is the test of a distributor &mdash; and the test we ask the group to pass with every trade order.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-services">
+  <section class="page-header"><div class="wrap"><div class="inner">
+    <span class="eyebrow">What We Offer &mdash; 03</span>
+    <h1>What the <em>trade</em> can rely on.</h1>
+    <p class="lede">Six service lines define the day-to-day work of Millennium Group &mdash; together, a dependable supply link between pharmaceutical manufacturers and the healthcare providers who serve patients across the region.</p>
+  </div></div></section>
+  <section class="section">
+    <div class="wrap">
+      <div class="svc-grid"><div class="svc"><div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></div>
+          <div class="svc-body"><h3>Wholesale Distribution</h3><p>Bulk supply of branded and generic pharmaceutical products to retail pharmacies, hospitals and institutional buyers. The core of what Millennium Medisolutions does &mdash; consistent stock, dependably delivered, across Haryana and the wider NCR.</p><div class="svc-tags"><span class="svc-tag">Bulk Supply</span><span class="svc-tag">Retail Trade</span><span class="svc-tag">Institutions</span></div></div></div><div class="svc"><div class="svc-mark"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(45 12 12)"/><path d="M8.5 8.5l7 7"/></svg></div>
+          <div class="svc-body"><h3>Branded &amp; Generic Range</h3><p>A broad working range covering established branded medicines and cost-effective generics, so the providers we serve can meet every patient need.</p><div class="svc-tags"><span class="svc-tag">Branded</span><span class="svc-tag">Generics</span><span class="svc-tag">Wide Range</span></div></div></div><div class="svc"><div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v5c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div class="svc-body"><h3>Authenticity &amp; Traceability</h3><p>Stock sourced through legitimate, authorised supply channels and supplied in original manufacturer packaging with intact batch and expiry information.</p><div class="svc-tags"><span class="svc-tag">Genuine Stock</span><span class="svc-tag">Batch Trace</span><span class="svc-tag">Original Packs</span></div></div></div><div class="svc"><div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M14 14V5a2 2 0 00-4 0v9a4 4 0 104 0z"/></svg></div>
+          <div class="svc-body"><h3>Storage &amp; Stock Management</h3><p>Organised warehousing with attention to storage conditions, stock rotation and shelf-life &mdash; protecting product integrity at every stage.</p><div class="svc-tags"><span class="svc-tag">Warehousing</span><span class="svc-tag">Rotation</span><span class="svc-tag">Shelf-life</span></div></div></div><div class="svc"><div class="svc-mark"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="13" height="10"/><path d="M15 10h4l3 3v4h-7"/><circle cx="6.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg></div>
+          <div class="svc-body"><h3>Order Fulfilment &amp; Delivery</h3><p>Trade orders picked, checked against batch and expiry, and dispatched on a dependable schedule to the pharmacies and providers we serve.</p><div class="svc-tags"><span class="svc-tag">Accurate Picking</span><span class="svc-tag">Timely Dispatch</span><span class="svc-tag">Scheduling</span></div></div></div><div class="svc"><div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M12 8l-3-2-5 4v6l3 2 3-2M12 8l3-2 5 4v6l-3 2-4-3M12 8v8"/></svg></div>
+          <div class="svc-body"><h3>Trade Account Support</h3><p>Onboarding and ongoing support for verified trade partners &mdash; from account opening through to regular resupply, documentation and queries.</p><div class="svc-tags"><span class="svc-tag">Onboarding</span><span class="svc-tag">Resupply</span><span class="svc-tag">Support</span></div></div></div></div>
+      <div class="levels">
+        <div class="level"><div class="level-tag">SERVING / A</div><h3>Retail Pharmacies</h3><p>Independent chemists and pharmacy outlets across the region rely on the group for consistent stock of branded and generic medicines and dependable resupply.</p></div>
+        <div class="level"><div class="level-tag">SERVING / B</div><h3>Hospitals &amp; Clinics</h3><p>Hospitals, clinics and practising doctors are supported with reliable supply of the medicines that day-to-day patient care depends on.</p></div>
+        <div class="level"><div class="level-tag">SERVING / C</div><h3>Institutional Buyers</h3><p>Institutional buyers are served with organised bulk fulfilment, product authenticity and consistent service standards.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-contact">
+  <section class="page-header"><div class="wrap"><div class="inner">
+    <span class="eyebrow">Contact &mdash; 04</span>
+    <h1>Reach our <em>offices</em> &mdash; <span class="gold">Gurugram, Panchkula &amp; Dehradun.</span></h1>
+    <p class="lede">Trade enquiries, new account opening, product availability and delivery scheduling &mdash; the group's head office in Gurugram and our branch offices in Panchkula and Dehradun are all available to help.</p>
+  </div></div></section>
+  <section class="section">
+    <div class="wrap">
+      <div class="locations-grid">
+        <div class="contact-card">
+          <div class="contact-ic"><svg viewBox="0 0 24 24"><path d="M12 2C7.5 2 4 5.5 4 10c0 6 8 12 8 12s8-6 8-12c0-4.5-3.5-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="contact-tag">Head Office</div>
+          <h3>Gurugram, Haryana</h3>
+          <div class="loc-row"><span class="lbl">Address</span><span class="val">Khasra No 672, 678, 679, Hero Honda Chowk, NH-8, Village Khandsa, Gurugram, Haryana &mdash; 122001</span></div>
+          <div class="loc-row"><span class="lbl">GSTIN</span><span class="val"><strong>06AAMCM2392L1Z0</strong></span></div>
+          <div class="loc-row"><span class="lbl">Customer Care</span><span class="val"><a href="tel:01245064647">0124&ndash;5064647</a> <em style="color:var(--muted);font-style:normal;font-size:12.5px">(50 lines)</em></span></div>
+          <div class="loc-row"><span class="lbl">Email</span><span class="val"><a href="mailto:admin@millenniumgroup.in">admin@millenniumgroup.in</a></span></div>
+          <div class="loc-row"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/919266027938" target="_blank" rel="noopener">+91 92660 27938</a></span></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-ic"><svg viewBox="0 0 24 24"><path d="M12 2C7.5 2 4 5.5 4 10c0 6 8 12 8 12s8-6 8-12c0-4.5-3.5-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="contact-tag">Branch Office</div>
+          <h3>Panchkula, Haryana</h3>
+          <div class="loc-row"><span class="lbl">Address</span><span class="val">Plot No 331, Basement, Industrial Area Phase&nbsp;1, Panchkula, Haryana &mdash; 133302</span></div>
+          <div class="loc-row"><span class="lbl">GSTIN</span><span class="val"><strong>06AAMCM2392L1Z0</strong></span></div>
+          <div class="loc-row"><span class="lbl">Customer Care</span><span class="val"><a href="tel:+918684805022">+91 86848 05022</a></span></div>
+          <div class="loc-row"><span class="lbl">Email</span><span class="val"><a href="mailto:panchkula@millenniumgroup.in">panchkula@millenniumgroup.in</a></span></div>
+          <div class="loc-row"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/919266027922" target="_blank" rel="noopener">+91 92660 27922</a></span></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-ic"><svg viewBox="0 0 24 24"><path d="M12 2C7.5 2 4 5.5 4 10c0 6 8 12 8 12s8-6 8-12c0-4.5-3.5-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="contact-tag">Branch Office</div>
+          <h3>Dehradun, Uttarakhand</h3>
+          <div class="loc-row"><span class="lbl">Address</span><span class="val">Plot No 90, Manglam Warehouse, Transport Nagar, Dehradun, Uttarakhand &mdash; 248002</span></div>
+          <div class="loc-row"><span class="lbl">GSTIN</span><span class="val"><strong>05AAMCM2392L1Z2</strong></span></div>
+          <div class="loc-row"><span class="lbl">Customer Care</span><span class="val"><a href="tel:+919897071961">+91 98970 71961</a></span></div>
+          <div class="loc-row"><span class="lbl">Email</span><span class="val"><a href="mailto:ddn@millenniumgroup.in">ddn@millenniumgroup.in</a></span></div>
+          <div class="loc-row"><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/919266027923" target="_blank" rel="noopener">+91 92660 27923</a></span></div>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4.5 6 4.5 9s-1.5 6-4.5 9c-3-3-4.5-6-4.5-9s1.5-6 4.5-9z"/></svg></div>
+          <div class="contact-tag">Web</div>
+          <h3>Online</h3>
+          <p>Group website &amp; trade enquiries:</p>
+          <p><a href="https://millenniumgroup.in" target="_blank" rel="noopener">millenniumgroup.in</a></p>
+        </div>
+        <div class="contact-card">
+          <div class="contact-ic"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h6"/></svg></div>
+          <div class="contact-tag">Statutory</div>
+          <h3>Company Identifiers</h3>
+          <p><strong>CIN</strong> &nbsp; U74999HR2018PTC076964</p>
+          <p><strong>GSTIN (Haryana)</strong> &nbsp; 06AAMCM2392L1Z0</p>
+          <p><strong>GSTIN (Uttarakhand)</strong> &nbsp; 05AAMCM2392L1Z2</p>
+          <p><strong>LEI</strong> &nbsp; 335800R51P6A7WNTWD75</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-faq">
+  <section class="page-header"><div class="wrap"><div class="inner">
+    <span class="eyebrow">FAQ &mdash; 05</span>
+    <h1>Questions, <em>plainly answered.</em></h1>
+    <p class="lede">Common questions from trade partners, prospective accounts and others. For anything not covered here, our Gurugram office is the fastest channel.</p>
+  </div></div></section>
+  <section class="section"><div class="wrap"><div class="faq-list"><details class="faq"><summary>
+          <span class="faq-no">Q/01</span><span class="faq-q">What does Millennium Group do?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">Millennium Group is a pharmaceutical distribution and supply business, operating through its flagship company Millennium Medisolutions Private Limited. The group supplies branded and generic medicines to pharmacies, hospitals and institutional buyers across Haryana and the wider National Capital Region.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/02</span><span class="faq-q">Where are the group's offices located?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">The group operates from three offices. The <strong>head office</strong> is at Khasra No 672, 678, 679, Hero Honda Chowk, NH-8, Village Khandsa, Gurugram, Haryana &mdash; 122001. The <strong>Panchkula branch</strong> is at Plot No 331, Basement, Industrial Area Phase 1, Panchkula, Haryana &mdash; 133302. The <strong>Dehradun branch</strong> is at Plot No 90, Manglam Warehouse, Transport Nagar, Dehradun, Uttarakhand &mdash; 248002. Full contact details for each office are on the Contact page.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/03</span><span class="faq-q">When was Millennium Medisolutions Private Limited incorporated?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">Millennium Medisolutions Private Limited was incorporated on <strong>20 November 2018</strong> and is registered with the Registrar of Companies, Delhi, under CIN U74999HR2018PTC076964.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/04</span><span class="faq-q">Who are the directors of the company?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">The current directors are <strong>Shitiz Sukhija</strong> (Whole-Time Director, associated since incorporation in 2018) and <strong>Amar Nath Lalka</strong> (Additional Director, appointed 26 May 2025). Director information is based on public records filed with the Ministry of Corporate Affairs.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/05</span><span class="faq-q">How large is the team?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">The group employs around <strong>162 professionals</strong> across warehousing, fulfilment, accounts, sales and administrative functions.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/06</span><span class="faq-q">Who can open a trade account with the group?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">We supply the healthcare trade &mdash; retail pharmacies, hospitals, clinics and institutional buyers holding valid drug-licence documentation. To open an account, please contact the Gurugram office; see the Contact page.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/07</span><span class="faq-q">Does the group supply both branded and generic medicines?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">Yes. The working range covers established branded medicines as well as cost-effective generics, so the pharmacies and providers served can meet the needs of every patient.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/08</span><span class="faq-q">Does the group sell directly to patients?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">No. The group is a business-to-business distribution and supply operation. Patients should obtain medicines from a licensed pharmacy or hospital, on a valid prescription where the law requires one.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/09</span><span class="faq-q">How is authenticity ensured?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">Stock is sourced exclusively through legitimate, authorised supply channels and is supplied in its original manufacturer packaging, with intact batch and expiry information so that products remain traceable through the chain.</div></details><details class="faq"><summary>
+          <span class="faq-no">Q/10</span><span class="faq-q">Is Millennium Medisolutions GST-registered?</span>
+          <span class="faq-tg"></span></summary>
+          <div class="faq-a">Yes. The company is registered under GST with GSTIN <strong>06AAMCM2392L1Z0</strong>. The leading state code 06 corresponds to Haryana, and the GSTIN appears on every tax invoice we issue.</div></details></div></div></section>
+</div>
+
+<div class="page" id="page-privacy">
+  <section class="page-header"><div class="wrap"><div class="inner">
+    <span class="eyebrow">Privacy &mdash; 06</span>
+    <h1>Privacy <em>Policy</em></h1>
+    <p class="lede">How Millennium Group (Millennium Medisolutions Private Limited) collects, uses and protects information of trade partners and others who interact with the group.</p>
+  </div></div></section>
+  <section class="section"><div class="wrap"><div class="policy-grid">
+    <aside class="policy-toc"><h4>Contents</h4><ol><li>Scope</li><li>Information We Collect</li><li>How We Use Information</li><li>Sharing &amp; Disclosure</li><li>Retention</li><li>Security</li><li>Your Choices</li><li>Updates &amp; Governing Law</li></ol></aside>
+    <div class="policy-body"><section><h2><span class="num">01</span> Scope</h2><p>This privacy policy explains how Millennium Medisolutions Private Limited (operating as <strong>Millennium Group</strong>, hereafter <strong>the company</strong>, <strong>we</strong> or <strong>our</strong>) handles personal and business information collected through trade interactions, telephone and email correspondence, and any digital channels operated by the group.</p></section><section><h2><span class="num">02</span> Information We Collect</h2><p>We may collect: (a) <strong>identity and contact information</strong> such as name, designation, business name, address, telephone, email and statutory identifiers like GSTIN and drug-licence number; (b) <strong>commercial information</strong> including order history, invoices, payment references and delivery acknowledgements; and (c) <strong>communication records</strong> from calls and emails exchanged with us in the course of trade.</p></section><section><h2><span class="num">03</span> How We Use Information</h2><p>Information is used to operate the distribution business &mdash; processing and fulfilling trade orders, raising GST-compliant invoices, verifying drug-licence eligibility, scheduling deliveries, maintaining trade accounts, responding to enquiries and protecting against fraud or product diversion.</p></section><section><h2><span class="num">04</span> Sharing &amp; Disclosure</h2><p>We share information only as needed: (a) with statutory and regulatory authorities where disclosure is required by law; (b) with logistics, transport and payment partners strictly to perform a requested service; and (c) with professional advisers under confidentiality obligations. We do not sell personal information.</p></section><section><h2><span class="num">05</span> Retention</h2><p>We retain information for as long as needed to serve the purposes above and to meet record-keeping obligations under the Companies Act, the GST regime, the Drugs and Cosmetics Act and other applicable law. When no longer required, records are securely deleted or anonymised.</p></section><section><h2><span class="num">06</span> Security</h2><p>We apply reasonable administrative, physical and organisational safeguards proportionate to the sensitivity of the information held, including controlled access to records and care in electronic communication. No method of transmission or storage is perfectly secure, and we ask trade partners to apply equivalent care.</p></section><section><h2><span class="num">07</span> Your Choices</h2><p>Trade partners may request access to, correction of, or deletion of personal information we hold, subject to identity verification and any overriding legal record-keeping obligation. Requests may be made in writing to our Gurugram office.</p></section><section><h2><span class="num">08</span> Updates &amp; Governing Law</h2><p>This policy may be updated from time to time; the current version is the one published here. It is governed by Indian law, and the courts at Gurugram, Haryana have exclusive jurisdiction over any dispute arising in connection with it.</p></section></div>
+  </div></div></section>
+</div>
+
+<div class="page" id="page-terms">
+  <section class="page-header"><div class="wrap"><div class="inner">
+    <span class="eyebrow">Terms &mdash; 07</span>
+    <h1>Terms &amp; <em>Conditions</em></h1>
+    <p class="lede">The terms below govern dealings with Millennium Group (Millennium Medisolutions Private Limited), including use of this website and engagement through our trade channels.</p>
+  </div></div></section>
+  <section class="section"><div class="wrap"><div class="policy-grid">
+    <aside class="policy-toc"><h4>Contents</h4><ol><li>Definitions</li><li>Trade Eligibility</li><li>Orders &amp; Acceptance</li><li>Pricing &amp; Taxes</li><li>Payment</li><li>Delivery, Title &amp; Risk</li><li>Handling &amp; Resale of Goods</li><li>Product Authenticity</li><li>Limitation of Liability</li><li>Governing Law &amp; Jurisdiction</li></ol></aside>
+    <div class="policy-body"><section><h2><span class="num">01</span> Definitions</h2><p>'Company', 'Millennium Group' or 'Millennium' means Millennium Medisolutions Private Limited, the operating Private Limited company of the group, based in Gurugram, Haryana. 'Counterparty', 'you' or 'your' means any pharmacy, hospital, clinic or other person engaging with the company. 'Goods' means pharmaceutical products supplied by the company.</p></section><section><h2><span class="num">02</span> Trade Eligibility</h2><p>Goods are supplied on a business-to-business basis only. Trade accounts and orders are open to entities holding a valid drug licence and other applicable statutory registrations. By placing an order, the counterparty confirms that such registrations are current and that the person placing it is authorised to do so.</p></section><section><h2><span class="num">03</span> Orders &amp; Acceptance</h2><p>An order placed by phone, email or other accepted channel is an offer to purchase. The company's acceptance occurs on confirmation or dispatch of the order; until then, the company may decline or partially fulfil an order, including where stock or licence verification is not satisfied.</p></section><section><h2><span class="num">04</span> Pricing &amp; Taxes</h2><p>Prices are those confirmed at the time of order acceptance and are exclusive of taxes unless stated otherwise. Applicable GST is charged on every invoice. Prices are subject to change for future orders in line with supplier pricing and market conditions.</p></section><section><h2><span class="num">05</span> Payment</h2><p>Payment is due on the terms communicated at order acceptance &mdash; advance, on delivery, or on agreed credit. Amounts outstanding beyond agreed terms may lead to suspension of further supply and recovery action, and may attract interest where notified.</p></section><section><h2><span class="num">06</span> Delivery, Title &amp; Risk</h2><p>The company aims for timely delivery, but timelines are good-faith estimates rather than guarantees. Risk in the Goods passes on delivery to the counterparty or its nominated carrier; title passes only on receipt of full payment. The counterparty should inspect Goods on delivery and record any shortage or visible damage on the delivery document.</p></section><section><h2><span class="num">07</span> Handling &amp; Resale of Goods</h2><p>The counterparty undertakes to store, handle, dispense and resell the Goods in compliance with the Drugs and Cosmetics Act and applicable rules, to preserve storage conditions where required, and not to tamper with packaging, labelling or batch information.</p></section><section><h2><span class="num">08</span> Product Authenticity</h2><p>The company sources Goods through legitimate supply channels and supplies them in their original manufacturer packaging. Product specifications, indications and warranties are those of the respective manufacturer; the company acts as a distributor and supplier.</p></section><section><h2><span class="num">09</span> Limitation of Liability</h2><p>To the extent permitted by law, the company's liability in connection with any order is limited to the invoice value of that order. The company is not liable for indirect or consequential loss, or for matters attributable to the manufacturer, the counterparty's handling, or events beyond reasonable control.</p></section><section><h2><span class="num">10</span> Governing Law &amp; Jurisdiction</h2><p>These terms are governed by the laws of India. The courts at Gurugram, Haryana have exclusive jurisdiction over any dispute, claim or proceeding arising out of or in connection with these terms or any transaction governed by them.</p></section></div>
+  </div></div></section>
+</div>
+
+<div class="page" id="page-refund">
+  <section class="page-header"><div class="wrap"><div class="inner">
+    <span class="eyebrow">Refund &mdash; 08</span>
+    <h1>Returns &amp; <em>Refunds</em></h1>
+    <p class="lede">Pharmaceutical returns are tightly regulated for patient-safety reasons. The terms below describe the limited circumstances in which the group accepts returns from the trade.</p>
+  </div></div></section>
+  <section class="section"><div class="wrap"><div class="policy-grid">
+    <aside class="policy-toc"><h4>Contents</h4><ol><li>General Position</li><li>Eligible Returns</li><li>Notification Window</li><li>Conditions for Acceptance</li><li>Near-expiry &amp; Expiry</li><li>Credit Mechanism</li><li>Disputes &amp; Jurisdiction</li></ol></aside>
+    <div class="policy-body"><section><h2><span class="num">01</span> General Position</h2><p>As a pharmaceutical distributor, the company does not accept returns of correctly supplied Goods on grounds of changed buying preference or over-ordering. Returns are limited to the specific situations described below and are always subject to verification.</p></section><section><h2><span class="num">02</span> Eligible Returns</h2><p>Returns may be considered where: (a) Goods were supplied in error against the confirmed order; (b) Goods were damaged in transit and the damage was recorded on the delivery document; (c) Goods were received with a manufacturing defect; or (d) a product recall has been initiated by the manufacturer or a competent authority.</p></section><section><h2><span class="num">03</span> Notification Window</h2><p>Discrepancies and transit damage under heads (a) and (b) must be reported to the company within <strong>three (3) working days</strong> of receipt, with supporting evidence and the original delivery document. Suspected manufacturing defects under head (c) should be reported promptly on discovery. Recalls under head (d) follow the timelines stated in the recall notice.</p></section><section><h2><span class="num">04</span> Conditions for Acceptance</h2><p>Goods presented for return must be in their original manufacturer packaging, with intact batch and expiry details, not tampered with, decanted or relabelled, and accompanied by the relevant invoice reference. A return is accepted only after the company issues a return authorisation.</p></section><section><h2><span class="num">05</span> Near-expiry &amp; Expiry</h2><p>Any near-expiry or expiry return is handled strictly in accordance with the policy of the relevant manufacturer and applicable regulation. The company will guide trade partners on the manufacturer's expiry-return window and procedure where such a facility exists.</p></section><section><h2><span class="num">06</span> Credit Mechanism</h2><p>Where a return is approved, the value is generally adjusted as a credit against the counterparty's account or future invoices. Any GST adjustment is processed through a credit note compliant with applicable tax rules. Timelines for manufacturer-linked returns depend on that manufacturer's processing.</p></section><section><h2><span class="num">07</span> Disputes &amp; Jurisdiction</h2><p>Any dispute regarding a return or credit should be raised in writing with the Gurugram office. Unresolved disputes are subject to the exclusive jurisdiction of the courts at Gurugram, Haryana, and governed by Indian law.</p></section></div>
+  </div></div></section>
+</div>
+
+<div class="page" id="page-shipping">
+  <section class="page-header"><div class="wrap"><div class="inner">
+    <span class="eyebrow">Shipping &mdash; 09</span>
+    <h1>Delivery &amp; <em>Dispatch</em></h1>
+    <p class="lede">How orders accepted by Millennium Group are processed, dispatched and delivered to the healthcare trade.</p>
+  </div></div></section>
+  <section class="section"><div class="wrap"><div class="policy-grid">
+    <aside class="policy-toc"><h4>Contents</h4><ol><li>Service Area</li><li>Order Processing</li><li>Dispatch &amp; Carriage</li><li>Handling &amp; Storage in Transit</li><li>Delivery &amp; Inspection</li><li>Charges</li><li>Failed or Refused Delivery</li><li>Contact</li></ol></aside>
+    <div class="policy-body"><section><h2><span class="num">01</span> Service Area</h2><p>The group delivers to verified trade addresses across Haryana and the wider National Capital Region where the counterparty holds a valid drug licence and where the group is in a position to serve. Serviceability for a particular location is confirmed at the time of order acceptance.</p></section><section><h2><span class="num">02</span> Order Processing</h2><p>Confirmed trade orders are picked, checked against batch and expiry, and prepared for dispatch as promptly as stock and verification allow. Processing time depends on product availability, order size and successful drug-licence confirmation for new accounts.</p></section><section><h2><span class="num">03</span> Dispatch &amp; Carriage</h2><p>Dispatch is arranged through the group's own delivery arrangements or trusted transport partners selected for pharmaceutical handling. The group aims for dependable, timely delivery, though delivery timelines are good-faith estimates rather than guarantees.</p></section><section><h2><span class="num">04</span> Handling &amp; Storage in Transit</h2><p>Goods are handled to protect product integrity. Where particular products require specific storage conditions, reasonable care is taken in line with the manufacturer's requirements; the counterparty should inspect such Goods promptly on receipt.</p></section><section><h2><span class="num">05</span> Delivery &amp; Inspection</h2><p>On delivery, the counterparty's representative should verify parcel count and check for visible damage, and record any discrepancy on the delivery document before acknowledging receipt. Acceptance without such notation is treated as confirmation of correct delivery for the purposes of the Returns &amp; Refunds policy.</p></section><section><h2><span class="num">06</span> Charges</h2><p>Any delivery or freight charges, where applicable, are advised at the time of order acceptance and itemised on the tax invoice. Minimum-order conditions, if any, are communicated through the office.</p></section><section><h2><span class="num">07</span> Failed or Refused Delivery</h2><p>Where a delivery cannot be completed because the consignee is unavailable, refuses receipt, or the address is unserviceable, the Goods are returned to the company and re-delivery may attract additional charges. Perishable or short-dated Goods are handled in accordance with regulation.</p></section><section><h2><span class="num">08</span> Contact</h2><p>Delivery and dispatch queries are handled by the Gurugram office during working hours; see the Contact page.</p></section></div>
+  </div></div></section>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="foot-brand-row">
+        <span class="logo-bg logo-footer" role="img" aria-label="Millennium Group logo"></span>
+        <div>
+          <div class="foot-name">Millennium Group</div>
+          <div class="foot-tag">Estd. 2018 &middot; Gurugram &middot; Panchkula &middot; Dehradun</div>
+        </div>
+      </div>
+      <p class="foot-desc">A Gurugram-based pharmaceutical distribution and supply business, operating through its flagship company Millennium Medisolutions Private Limited.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Group</h4>
+      <ul>
+        <li><a href="#home" data-page="home">Home</a></li>
+        <li><a href="#about" data-page="about">About</a></li>
+        <li><a href="#services" data-page="services">What We Offer</a></li>
+        <li><a href="#contact" data-page="contact">Contact</a></li>
+        <li><a href="#faq" data-page="faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="#privacy" data-page="privacy">Privacy Policy</a></li>
+        <li><a href="#terms" data-page="terms">Terms &amp; Conditions</a></li>
+        <li><a href="#refund" data-page="refund">Returns &amp; Refunds</a></li>
+        <li><a href="#shipping" data-page="shipping">Delivery &amp; Dispatch</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Offices</h4>
+      <ul>
+        <li><p><b style="color:rgba(255,255,255,0.86)">HO &middot; Gurugram</b><br>Hero Honda Chowk, NH-8, Khandsa, Gurugram &mdash; 122001</p></li>
+        <li><p><b style="color:rgba(255,255,255,0.86)">Branch &middot; Panchkula</b><br>Plot 331, Industrial Area Phase 1, Panchkula &mdash; 133302</p></li>
+        <li><p><b style="color:rgba(255,255,255,0.86)">Branch &middot; Dehradun</b><br>Plot 90, Manglam Warehouse, Transport Nagar, Dehradun &mdash; 248002</p></li>
+        <li><a href="https://millenniumgroup.in" target="_blank" rel="noopener">millenniumgroup.in</a></li>
+      </ul>
+    </div>
   </div>
-
-  <div class="wrapper">
-
-    <section class="hero">
-      <div class="hero-top"></div>
-      <div class="hero-content">
-
-        <div class="hero-left">
-          <div class="tag">
-            <i class="fa-solid fa-capsules"></i>
-            Trusted Pharma Distribution Network
-          </div>
-
-          <h1>Millennium Medisolutions Pvt Ltd</h1>
-          <div class="sub-badge">A Unit of Entero Healthcare Solutions Limited</div>
-          <div class="line"></div>
-
-          <p>
-            Delivering reliable pharmaceutical distribution with speed, trust, and operational excellence.
-            We support healthcare supply chains through efficient logistics, professional service,
-            strong branch coordination, and seamless order management across locations.
-          </p>
-
-          <div class="btn-group">
-            <a href="https://www.enterodirect.com" target="_blank" class="btn btn-primary">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span>ONLINE ORDER PORTAL</span>
-            </a>
-
-            <a href="mailto:shitiz@millenniumgroup.in" class="btn btn-secondary">
-              <i class="fa-solid fa-envelope"></i>
-              <span>Email Corporate Desk</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <div class="hero-stats">
-            <div class="stat-card">
-              <h3><i class="fa-solid fa-building"></i> Multi-Location Presence</h3>
-              <p>Head Office and multiple branches designed for faster response, better supply coverage, and stronger customer service.</p>
-            </div>
-
-            <div class="stat-card">
-              <h3><i class="fa-solid fa-truck-fast"></i> Efficient Distribution</h3>
-              <p>Modern operational support for order processing, dispatch planning, and healthcare delivery coordination.</p>
-            </div>
-
-            <div class="stat-card">
-              <h3><i class="fa-solid fa-headset"></i> Customer Assistance</h3>
-              <p>Dedicated support through phone, email, and WhatsApp for order-related and general business queries.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <div class="section-title">
-      <h2>Our Locations</h2>
-      </div>
-
-    <section class="branch-grid">
-
-      <div class="branch-card">
-        <div class="branch-top">
-    
-          <h3><i class="fa-solid fa-landmark"></i> HO - Gurugram</h3>
-        </div>
-        <div class="branch-body">
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
-            <div class="info-text">
-              <strong>Office Address</strong>
-          KHASRA NO 672,678,679, HERO HONDA CHOWK, N H 8 VILLAGE KHANDSA, GURUGRAM, HARYANA - 122001
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-file-invoice"></i></div>
-            <div class="info-text">
-              <strong>GSTIN</strong>
-              <span class="gst-number">06AAMCM2392L1Z0</span>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-phone-volume"></i></div>
-            <div class="info-text">
-              <strong>Customer Care</strong>
-              <span class="phone-number">0124-5064647 (50 Lines)</span>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
-            <div class="info-text">
-              <strong>Email</strong>
-              <a href="mailto:admin@millenniumgroup.in" class="mail-link">admin@millenniumgroup.in</a>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
-            <div class="info-text">
-              <strong>WhatsApp</strong>
-              <a href="https://wa.me/+919266027938" target="_blank" class="whatsapp-link">+91 92660 27938</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="branch-card">
-        <div class="branch-top">
-        <h3><i class="fa-solid fa-hospital-user"></i> Branch - Panchkula</h3>
-        </div>
-        <div class="branch-body">
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
-            <div class="info-text">
-              <strong>Office Address</strong>
-           PLOT NO 331, BASEMENT INDUSTRIAL AREA PHASE- 1, PANCHKULA HARYANA, PANCHKULA - 133302
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-file-invoice"></i></div>
-            <div class="info-text">
-              <strong>GSTIN</strong>
-              <span class="gst-number">06AAMCM2392L1Z0</span>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-phone-volume"></i></div>
-            <div class="info-text">
-              <strong>Customer Care</strong>
-              <span class="phone-number">+91 08684805022</span>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
-            <div class="info-text">
-              <strong>Email</strong>
-              <a href="mailto:panchkula@millenniumgroup.in" class="mail-link">panchkula@millenniumgroup.in</a>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
-            <div class="info-text">
-              <strong>WhatsApp</strong>
-              <a href="https://wa.me/+919266027922" target="_blank" class="whatsapp-link">+91 92660 27922</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="branch-card">
-        <div class="branch-top">
-                   <h3><i class="fa-solid fa-warehouse"></i> Branch - Dehradun</h3>
-        </div>
-        <div class="branch-body">
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
-            <div class="info-text">
-              <strong>Office Address</strong>
-          PLOT NO 90, MANGLAM WAREHOUSE, TRANSPORT NAGAR, TRANSPORT NAGAR, DEHRADUN, DEHRADUN, UTTARAKHAND - 248002
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-file-invoice"></i></div>
-            <div class="info-text">
-              <strong>GSTIN</strong>
-              <span class="gst-number">05AAMCM2392L1Z2</span>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-phone-volume"></i></div>
-            <div class="info-text">
-              <strong>Customer Care</strong>
-              <span class="phone-number">+91 9897071961</span>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
-            <div class="info-text">
-              <strong>Email</strong>
-              <a href="mailto:ddn@millenniumgroup.in" class="mail-link">ddn@millenniumgroup.in</a>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
-            <div class="info-text">
-              <strong>WhatsApp</strong>
-              <a href="https://wa.me/+919266027923" target="_blank" class="whatsapp-link">+91 92660 27923</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </section>
+  <div class="foot-bottom">
+    <span>&copy; 2018&ndash;2026 MILLENNIUM MEDISOLUTIONS PRIVATE LIMITED &middot; ALL RIGHTS RESERVED</span>
+    <span>CIN <b>U74999HR2018PTC076964</b> &middot; GSTIN <b>06AAMCM2392L1Z0</b> &middot; LEI <b>335800R51P6A7WNTWD75</b></span>
   </div>
+</footer>
 
-  <div class="footer">
-    © 2026 Millennium Medisolutions Pvt Ltd. All Rights Reserved.
-  </div>
-
+<script>
+var VALID_PAGES=['home','about','services','contact','faq','privacy','terms','refund','shipping'];
+function showPage(slug, _fromHash){
+  if(VALID_PAGES.indexOf(slug)<0) slug='home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  var el=document.getElementById('page-'+slug);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('a[data-page]').forEach(a=>{
+    a.classList.toggle('active', a.dataset.page===slug);
+  });
+  var nav=document.getElementById('navLinks'),ham=document.getElementById('ham');
+  if(nav) nav.classList.remove('open');
+  if(ham) ham.classList.remove('open');
+  if(!_fromHash){
+    if(slug==='home' && location.hash){
+      history.pushState('','',location.pathname+location.search);
+    } else if(slug!=='home' && location.hash!=='#'+slug){
+      history.pushState(null,'','#'+slug);
+    }
+  }
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function toggleMenu(){
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('ham').classList.toggle('open');
+}
+document.addEventListener('click', function(e){
+  var a=e.target.closest('a[data-page]');
+  if(!a) return;
+  var slug=a.getAttribute('data-page');
+  if(VALID_PAGES.indexOf(slug)<0) return;
+  e.preventDefault();
+  showPage(slug);
+});
+(function initRouter(){
+  var slug=(location.hash||'').replace('#','').toLowerCase();
+  if(slug && VALID_PAGES.indexOf(slug)>=0 && slug!=='home') showPage(slug, true);
+})();
+window.addEventListener('hashchange', function(){
+  var slug=(location.hash||'').replace('#','').toLowerCase() || 'home';
+  showPage(slug, true);
+});
+</script>
 </body>
 </html>
